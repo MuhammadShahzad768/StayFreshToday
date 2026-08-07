@@ -6,7 +6,7 @@ const { healthPosts,category,slug } = Astro.props;
   console.log(healthPosts);
 </script>
 <section> <div class="mb-12 flex items-center justify-between"> <h2 class="text-3xl font-bold">{category}</h2> 
-    <a href=`/category/${slug}` class="relative inline-block transition duration-250 ease-out before:content-[''] before:absolute before:inset-y-[-10px] before:inset-x-[-7px] active:scale-95 text-sm font-medium text-blue-600 underline-offset-4 underline decoration-transparent hover:decoration-current active:decoration-current dark:text-yellow-400"> View all posts → </a> </div> <div class="grid grid-cols-1 gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-3"> 
+    <a href=`/category/${slug}` class="relative inline-block transition duration-250 ease-out before:content-[''] before:absolute before:inset-y-[-10px] before:inset-x-[-7px] active:scale-95 text-sm font-medium text-blue-600 underline-offset-4 underline decoration-transparent hover:decoration-current active:decoration-current dark:text-yellow-400"> View all posts &rarr; </a> </div> <div class="grid grid-cols-1 gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-3"> 
         {healthPosts.map((post) => (
 <article class="group relative flex flex-col">  <div class="relative overflow-hidden bg-neutral-200 dark:bg-neutral-700 mb-4 aspect-video rounded-lg"> <img class="astro-cloudinary-cldimage absolute inset-0 h-full w-full object-cover transition duration-250 ease-out group-hover:scale-105 group-active:scale-105" 
 alt={post._embedded["wp:featuredmedia"][0].alt_text}
@@ -31,6 +31,6 @@ loading="lazy" sizes="(max-width: 768px) 100vw, 33vw"  decoding="async" style="o
           year: "numeric",
           month: "short",
           day: "numeric",
-        })}</time>  <span>·</span></div> </div> </article>
+        })}</time> </div> </div> </article>
 ))}
 </div> </section>

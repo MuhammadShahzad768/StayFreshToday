@@ -1,0 +1,56 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { marked } from "marked";
+
+const response = await fetch(
+  "https://stayfreshtoday.com/wp-json/wp/v2/pages?slug=privacy-policy"
+);
+
+const PrivacyPolicy = await response.json();
+
+const title = PrivacyPolicy[0]?.title?.rendered || "Privacy Policy";
+
+function fixEncoding(text) {
+  try {
+    return Buffer.from(text, "latin1").toString("utf8");
+  } catch {
+    return text; // agar already valid UTF-8 hai to fallback
+  }
+}
+
+const rawContent = PrivacyPolicy[0]?.content?.rendered || "";
+
+const content = fixEncoding(rawContent);
+
+// Get Rank Math SEO
+const seoRes = await fetch(
+  `https://stayfreshtoday.com/wp-json/rankmath/v1/getHead?url=${encodeURIComponent(
+    "https://stayfreshtoday.com/privacy-policy/"
+  )}`
+);
+
+const seo = await seoRes.json();
+
+console.log("SEO:", seo);
+---
+
+<Layout title={title} seoHead={seo.head}>
+
+  <h1 class="mb-12 text-center text-4xl font-bold">
+    {title}
+  </h1>
+
+  <div
+    class="font-size prose prose-lg dark:prose-invert max-w-none text-black dark:text-neutral-100 flex flex-col gap-5"
+    set:html={content}
+  >
+  </div>
+
+</Layout>
+
+
+<style is:global>
+.font-size p {
+  font-size: 1.125rem;
+}
+</style>

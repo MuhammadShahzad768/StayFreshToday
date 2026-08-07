@@ -30,12 +30,19 @@ const postsResponse = await fetch(
   `https://stayfreshtoday.com/wp-json/wp/v2/posts?categories=${category.id}&_embed`
 );
 
-
+const categoryUrl = `https://stayfreshtoday.com/category/${category.slug}/`;
 const posts = await postsResponse.json();
+// Get Rank Math SEO
+const seoRes = await fetch(
+  `https://stayfreshtoday.com/wp-json/rankmath/v1/getHead?url=${encodeURIComponent(categoryUrl)}`
+);
 
+const seo = await seoRes.json();
+
+console.log("SEO:", seo);
 ---
 
-<Layout title={category.name}>
+<Layout title={category.name} seoHead={seo.head}>
 <h1 class="mb-12 text-center text-4xl font-bold">{category.name}</h1>
 <div class="grid grid-cols-1 gap-x-8 gap-y-10 md:grid-cols-2 lg:grid-cols-3"> 
     {posts.map((post) => (
