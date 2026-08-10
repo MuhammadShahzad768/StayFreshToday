@@ -9,26 +9,24 @@ const WP_API_URL = import.meta.env.PUBLIC_WP_API_URL || "https://admin.yourdomai
     <div class="flex h-16 items-center justify-between">
       <!-- Logo -->
       <div class="shrink-0">
-        <a href="/" class="relative inline-block transition duration-250 ease-out before:content-[''] before:absolute before:inset-y-[-10px] before:inset-x-[-7px] active:scale-95 hover:text-blue-500 active:text-blue-500 dark:hover:text-yellow-400 dark:active:text-yellow-400 text-xl font-bold">
+        <a href="/" class="relative inline-block transition duration-250 ease-out before:content-[''] before:absolute before:inset-y-[-10px] before:inset-x-[-7px] active:scale-95 hover:text-[#025831] active:text-blue-500 dark:hover:text-yellow-400 dark:active:text-yellow-400 text-xl font-bold">
           Stay Fresh Today
         </a>
       </div>
 
       <!-- Desktop nav links -->
       <div class="hidden lg:flex lg:items-center lg:space-x-8">
-        <a href="/blog" class="relative inline-block before:content-[''] before:absolute before:inset-y-[-10px] before:inset-x-[-7px] active:scale-95 hover:text-blue-500 active:text-blue-500 dark:hover:text-yellow-400 dark:active:text-yellow-400 bg-[linear-gradient(currentColor,currentColor)] bg-no-repeat [background-position:0_100%] [background-size:0%_2px] transition-[background-size] duration-250 ease-out hover:[background-size:100%_2px] active:[background-size:100%_2px] group-hover:[background-size:100%_2px]">
+        <a href="/blog" class="relative inline-block before:content-[''] before:absolute before:inset-y-[-10px] before:inset-x-[-7px] active:scale-95 hover:text-[#025831] active:text-[#025831] dark:hover:text-yellow-400 dark:active:text-yellow-400 bg-[linear-gradient(currentColor,currentColor)] bg-no-repeat [background-position:0_100%] [background-size:0%_2px] transition-[background-size] duration-250 ease-out hover:[background-size:100%_2px] active:[background-size:100%_2px] group-hover:[background-size:100%_2px]">
           Blog
         </a>
-        <a href="/projects" class="relative inline-block before:content-[''] before:absolute before:inset-y-[-10px] before:inset-x-[-7px] active:scale-95 hover:text-blue-500 active:text-blue-500 dark:hover:text-yellow-400 dark:active:text-yellow-400 bg-[linear-gradient(currentColor,currentColor)] bg-no-repeat [background-position:0_100%] [background-size:0%_2px] transition-[background-size] duration-250 ease-out hover:[background-size:100%_2px] active:[background-size:100%_2px] group-hover:[background-size:100%_2px]">
-          Projects
-        </a>
-        <a href="/about-us" class="relative inline-block before:content-[''] before:absolute before:inset-y-[-10px] before:inset-x-[-7px] active:scale-95 hover:text-blue-500 active:text-blue-500 dark:hover:text-yellow-400 dark:active:text-yellow-400 bg-[linear-gradient(currentColor,currentColor)] bg-no-repeat [background-position:0_100%] [background-size:0%_2px] transition-[background-size] duration-250 ease-out hover:[background-size:100%_2px] active:[background-size:100%_2px] group-hover:[background-size:100%_2px]">
+       
+        <a href="/about-us" class="relative inline-block before:content-[''] before:absolute before:inset-y-[-10px] before:inset-x-[-7px] active:scale-95 hover:text-[#025831] active:text-[#025831] dark:hover:text-yellow-400 dark:active:text-yellow-400 bg-[linear-gradient(currentColor,currentColor)] bg-no-repeat [background-position:0_100%] [background-size:0%_2px] transition-[background-size] duration-250 ease-out hover:[background-size:100%_2px] active:[background-size:100%_2px] group-hover:[background-size:100%_2px]">
           About
         </a>
-        <a href="/contact-us" class="relative inline-block before:content-[''] before:absolute before:inset-y-[-10px] before:inset-x-[-7px] active:scale-95 hover:text-blue-500 active:text-blue-500 dark:hover:text-yellow-400 dark:active:text-yellow-400 bg-[linear-gradient(currentColor,currentColor)] bg-no-repeat [background-position:0_100%] [background-size:0%_2px] transition-[background-size] duration-250 ease-out hover:[background-size:100%_2px] active:[background-size:100%_2px] group-hover:[background-size:100%_2px]">
+        <a href="/contact-us" class="relative inline-block before:content-[''] before:absolute before:inset-y-[-10px] before:inset-x-[-7px] active:scale-95 hover:text-[#025831] active:text-[#025831] dark:hover:text-yellow-400 dark:active:text-yellow-400 bg-[linear-gradient(currentColor,currentColor)] bg-no-repeat [background-position:0_100%] [background-size:0%_2px] transition-[background-size] duration-250 ease-out hover:[background-size:100%_2px] active:[background-size:100%_2px] group-hover:[background-size:100%_2px]">
           Contact
         </a>
-        <a href="/newsletter" class="relative inline-block before:content-[''] before:absolute before:inset-y-[-10px] before:inset-x-[-7px] active:scale-95 hover:text-blue-500 active:text-blue-500 dark:hover:text-yellow-400 dark:active:text-yellow-400 bg-[linear-gradient(currentColor,currentColor)] bg-no-repeat [background-position:0_100%] [background-size:0%_2px] transition-[background-size] duration-250 ease-out hover:[background-size:100%_2px] active:[background-size:100%_2px] group-hover:[background-size:100%_2px]">
+        <a href="/newsletter" class="relative inline-block before:content-[''] before:absolute before:inset-y-[-10px] before:inset-x-[-7px] active:scale-95 hover:text-[#025831] active:text-[#025831] dark:hover:text-yellow-400 dark:active:text-yellow-400 bg-[linear-gradient(currentColor,currentColor)] bg-no-repeat [background-position:0_100%] [background-size:0%_2px] transition-[background-size] duration-250 ease-out hover:[background-size:100%_2px] active:[background-size:100%_2px] group-hover:[background-size:100%_2px]">
           Newsletter
         </a>
 
@@ -65,8 +63,7 @@ const WP_API_URL = import.meta.env.PUBLIC_WP_API_URL || "https://admin.yourdomai
     <!-- Mobile menu (unchanged) -->
     <div id="mobile-menu" class="pointer-events-none fixed top-16 right-0 bottom-0 left-0 z-50 overflow-auto" data-state="closed">
       <div class="pointer-events-auto flex flex-col space-y-1 border-b border-neutral-200 bg-white px-2 pt-2 pb-3 lg:hidden dark:border-neutral-700 dark:bg-neutral-900">
-        <a href="/blog" class="border-b border-neutral-200 px-4 py-3 text-center text-lg font-medium dark:border-neutral-600">Blog</a>
-        <a href="/projects" class="border-b border-neutral-200 px-4 py-3 text-center text-lg font-medium dark:border-neutral-600">Projects</a>
+        <a href="/blog" class="border-b border-neutral-200 px-4 py-3 text-center text-lg font-medium dark:border-[#025831]">Blog</a>
         <a href="/about" class="border-b border-neutral-200 px-4 py-3 text-center text-lg font-medium dark:border-neutral-600">About</a>
         <a href="/contact" class="border-b border-neutral-200 px-4 py-3 text-center text-lg font-medium dark:border-neutral-600">Contact</a>
         <a href="/newsletter" class="border-b border-neutral-200 px-4 py-3 text-center text-lg font-medium dark:border-neutral-600">Newsletter</a>

@@ -9,6 +9,10 @@ font-family: 'Poppins', sans-serif;
     animation-play-state: running;
     opacity: 1;
 }
+strong {
+    color: #025831;
+    font-size: 20px;
+}
 .card-hover-effect[data-astro-cid-upkumhrg]:before {
     content: "";
     position: absolute;
