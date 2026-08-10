@@ -56,7 +56,7 @@ const seo = await seoRes.json();
     class="group flex flex-col rounded-lg border border-neutral-200 p-6 transition duration-250 hover:border-blue-500 active:scale-95 dark:border-neutral-700 dark:hover:border-yellow-400"
   >
     <span class="mb-2 text-sm text-gray-700 dark:text-gray-300">
-      ← Previous blog
+   Previous blog
     </span>
 
     <span class="text-lg font-medium transition-colors duration-250 group-hover:text-blue-500 dark:group-hover:text-yellow-400">
@@ -71,7 +71,7 @@ const seo = await seoRes.json();
     class="group flex flex-col rounded-lg border border-neutral-200 p-6 transition duration-250 hover:border-blue-500 active:scale-95 dark:border-neutral-700 dark:hover:border-yellow-400"
   >
     <span class="mb-2 text-sm text-gray-700 dark:text-gray-300">
-      Next blog →
+      Next blog 
     </span>
 
     <span class="text-lg font-medium transition-colors duration-250 group-hover:text-blue-500 dark:group-hover:text-yellow-400">
@@ -80,111 +80,90 @@ const seo = await seoRes.json();
   </a>
 )}</div></nav>  
     </article>
-<toc-sidebar> <aside id="toc-sidebar" class="fixed top-16 right-0 z-50 h-[calc(100vh-4rem)] w-full max-w-xs overflow-y-auto bg-white p-8 shadow-xl transition-transform duration-300 ease-in-out sm:w-80 lg:w-96 dark:bg-neutral-800"> <nav id="toc"> <div class="mb-4 flex items-center justify-between"> <h2 class="text-lg font-semibold tracking-wider text-neutral-900 uppercase dark:text-white">
+<toc-sidebar> 
+  <aside id="toc-sidebar" class="fixed top-16 right-0 z-50 h-[calc(100vh-4rem)] w-full max-w-xs translate-x-full overflow-y-auto bg-white p-8 shadow-xl transition-transform duration-300 ease-in-out sm:w-80 lg:w-96 dark:bg-neutral-800"> 
+    <nav id="toc"> <div class="mb-4 flex items-center justify-between"> <h2 class="text-lg font-semibold tracking-wider text-neutral-900 uppercase dark:text-white">
 On this page
-</h2> <button id="close-toc-button" aria-label="Close table of contents" class="relative inline-block cursor-pointer rounded-full text-neutral-600 transition duration-250 ease-out before:absolute before:-inset-x-1.75 before:-inset-y-2.5 before:content-[''] hover:text-blue-500 active:scale-95 dark:text-neutral-400 dark:hover:text-yellow-400"> <svg width="1em" height="1em" viewBox="0 0 24 24" class="size-6" data-icon="lucide:x">   <use href="#ai:lucide:x"></use>  </svg> </button> </div> <ul id='on_page'> <li class="toc-item-wrapper" data-depth="2">  </li><li class="toc-item-wrapper" data-depth="2"> </li><li class="toc-item-wrapper" data-depth="2"> <a href="#youve-delivered-now-what" data-slug="youve-delivered-now-what" class="relative block truncate py-1.5 transition duration-250 ease-out hover:text-blue-600 dark:text-gray-300 dark:hover:text-yellow-400 pl-3"> You’ve Delivered. Now What? </a> <ul class="mt-1"> <li class="toc-item-wrapper" data-depth="3"> <a href="#final-step-of-the-series" data-slug="final-step-of-the-series" class="relative block truncate py-1.5 transition duration-250 ease-out hover:text-blue-600 dark:text-gray-300 dark:hover:text-yellow-400 pl-3"> Final Step of the Series </a>  </li> </ul> </li> </ul> </nav> </aside> </toc-sidebar>
+</h2> <button id="close-toc-button" aria-label="Close table of contents" class="relative inline-block cursor-pointer rounded-full text-neutral-600 transition duration-250 ease-out before:absolute before:-inset-x-1.75 before:-inset-y-2.5 before:content-[''] hover:text-blue-500 active:scale-95 dark:text-neutral-400 dark:hover:text-yellow-400">
+  <svg width="1em" height="1em" viewBox="0 0 24 24" class="size-6" data-icon="lucide:x">
+    <symbol id="ai:lucide:x" viewBox="0 0 24 24">
+      <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 6 6 18M6 6l12 12"></path>
+    </symbol>
+    <use href="#ai:lucide:x"></use>
+  </svg>
+</button> </div> <ul id='on_page'> <li class="toc-item-wrapper" data-depth="2">  </li><li class="toc-item-wrapper" data-depth="2"> </li><li class="toc-item-wrapper" data-depth="2"> <a href="#youve-delivered-now-what" data-slug="youve-delivered-now-what" class="relative block truncate py-1.5 transition duration-250 ease-out hover:text-blue-600 dark:text-gray-300 dark:hover:text-yellow-400 pl-3"> You’ve Delivered. Now What? </a> <ul class="mt-1"> <li class="toc-item-wrapper" data-depth="3"> <a href="#final-step-of-the-series" data-slug="final-step-of-the-series" class="relative block truncate py-1.5 transition duration-250 ease-out hover:text-blue-600 dark:text-gray-300 dark:hover:text-yellow-400 pl-3"> Final Step of the Series </a>  </li> </ul> </li> </ul> </nav> </aside> </toc-sidebar>
 <div id="overlay" class="fixed inset-0 z-40 bg-black/50 transition-all duration-500 opacity-0 invisible pointer-events-none"></div>
 <script>
   const openBtn = document.getElementById("open-toc-button");
   const closeBtn = document.getElementById("close-toc-button");
   const sidebar = document.getElementById("toc-sidebar");
 
-
-  const openSidebar = () => {
-    sidebar?.classList.remove("translate-x-full");
-  };
-
-
-  const closeSidebar = () => {
-    sidebar?.classList.add("translate-x-full");
-  };
-
+  const openSidebar = () => sidebar?.classList.remove("translate-x-full");
+  const closeSidebar = () => sidebar?.classList.add("translate-x-full");
 
   openBtn?.addEventListener("click", openSidebar);
-
   closeBtn?.addEventListener("click", closeSidebar);
 
-
   document.addEventListener("keydown", (e) => {
-    if(e.key === "Escape"){
-      closeSidebar();
+    if (e.key === "Escape") closeSidebar();
+  });
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const ezContainer = document.querySelector("#ez-toc-container .ez-toc-list");
+    const ez = ezContainer?.innerHTML || "";
+    const onpage = document.querySelector("#on_page");
+
+    if (onpage && ez) {
+      onpage.innerHTML = ez;
+
+      document.querySelectorAll("#on_page li").forEach((li) => {
+        li.className = "";
+        li.classList.add("toc-item-wrapper");
+      });
+
+      document.querySelectorAll("#on_page li a").forEach((a) => {
+        a.className = "";
+        a.classList.add(
+          "relative", "block", "truncate", "py-1.5",
+          "transition", "duration-250", "ease-out",
+          "hover:text-blue-600", "dark:text-gray-300",
+          "dark:hover:text-yellow-400", "pl-3"
+        );
+
+        // ✅ Sirf hash rakho, poora URL mat banao
+        const href = a.getAttribute("href");
+        if (href) {
+          const hashIndex = href.indexOf("#");
+          if (hashIndex !== -1) {
+            a.setAttribute("href", href.slice(hashIndex)); // e.g. "#final-step-of-the-series"
+          }
+        }
+      });
+
+      // Clear original ez-toc container
+      const container = document.querySelector("#ez-toc-container");
+      if (container) container.innerHTML = "";
     }
-  });
 
+    // ✅ Listener ab TOC inject hone ke BAAD, naye anchors pe lagega
+    document.querySelectorAll("#on_page a").forEach((a) => {
+      a.addEventListener("click", (e) => {
+        const href = a.getAttribute("href") || "";
+        const hashIndex = href.indexOf("#");
+        if (hashIndex === -1) return; // koi hash nahi to normal behave karne do
 
-  sidebar?.querySelectorAll("a").forEach(link => {
-    link.addEventListener("click", closeSidebar);
-  });
-document.addEventListener("DOMContentLoaded", () => {
+        e.preventDefault();
+        const targetId = href.slice(hashIndex);
+        const target = document.querySelector(targetId);
 
-  const ezContainer = document.querySelector("#ez-toc-container .ez-toc-list");
-  const ez = ezContainer?.innerHTML || "";
+        if (target) {
+          target.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
 
-  const onpage = document.querySelector("#on_page");
-
-  if (onpage) {
-    onpage.innerHTML = ez;
-
-    document.querySelectorAll("#on_page li").forEach((li) => {
-      li.className = "";
-      li.classList.add("toc-item-wrapper");
+        closeSidebar();
+      });
     });
-
-    document.querySelectorAll("#on_page li a").forEach((a) => {
-      a.className = "";
-      a.classList.add(
-        "relative",
-        "block",
-        "truncate",
-        "py-1.5",
-        "transition",
-        "duration-250",
-        "ease-out",
-        "hover:text-blue-600",
-        "dark:text-gray-300",
-        "dark:hover:text-yellow-400",
-        "pl-3"
-      );
-    });
-
-    // Clear original TOC
-    document.querySelector("#ez-toc-container").innerHTML = "";
-  }
- 
-const on_page = document.querySelectorAll("#on_page a");
-
-on_page.forEach((a) => {
-  let href = a.getAttribute("href");
-
-  if (href) {
-    a.setAttribute(
-      "href",
-      href.replace("https://stayfreshtoday.com/","http://localhost:4321/blog/")
-    );
-  }
-
-  console.log("Text:", a.innerText);
-  console.log("Link:", a.href);
-});
-});
-document.querySelectorAll("#on_page a").forEach((a) => {
-  a.addEventListener("click", (e) => {
-    const targetId = a.getAttribute("href");
-
-    if (targetId && targetId.startsWith("#")) {
-      e.preventDefault();
-
-      const target = document.querySelector(targetId);
-
-      if (target) {
-        target.scrollIntoView({
-          behavior: "smooth",
-          block: "start"
-        });
-      }
-    }
   });
-});
 </script>
 </Layout>
 </body>
