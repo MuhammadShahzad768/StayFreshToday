@@ -7,7 +7,15 @@ const response = await fetch(
 );
 
 const posts = await response.json();
+const seoUrl = "https://stayfreshtoday.com/";
 
+const seoResponse = await fetch(
+  `https://stayfreshtoday.com/wp-json/rankmath/v1/getHead?url=${encodeURIComponent(seoUrl)}`
+);
+
+const seoData = await seoResponse.json();
+
+console.log(seoData);
 // Fetch the category ID for "Health"
 const categoryResponse = await fetch(
   "https://stayfreshtoday.com/wp-json/wp/v2/categories?slug=health"
@@ -47,11 +55,11 @@ const latestPostsResponse = await fetch(
 const latestPosts = await latestPostsResponse.json();	
 ---
 
-<Layout title="Beauty Tips | Skincare &amp; Haircare | Health &amp; Nutrition Tips | Stayfreshtoday.com">
+<Layout title="Beauty Tips | Skincare &amp; Haircare | Health &amp; Nutrition Tips | Stayfreshtoday.com" seoHead={seoData.head}>
 
   <Banner posts={posts} />
-  <Categories healthPosts={healthPosts} category="Health" slug="health"/>
+  <Categories healthPosts={healthPosts} category="Health" slug="health" color={true}/>
   <Categories healthPosts={beautyTipsPosts} category="Beauty Tips" slug="beauty-tips"/>
-  <Categories healthPosts={fitnessPosts} category="Fitness & Exercise" slug="fitness-and-exercise"/>
-  <Categories healthPosts={latestPosts} category="Latest Posts" slug="latest-posts"/>
+  <Categories healthPosts={fitnessPosts} category="Fitness & Exercise" slug="fitness-and-exercise" color={true}/>
+  <Categories healthPosts={latestPosts} category="Latest Posts"  />
 </Layout>

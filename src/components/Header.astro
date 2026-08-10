@@ -4,13 +4,13 @@
 const WP_API_URL = import.meta.env.PUBLIC_WP_API_URL || "https://admin.yourdomain.com";
 ---
 
-<header class="sticky top-0 z-60 border-b border-neutral-200 bg-white dark:border-neutral-700 dark:bg-neutral-900">
+<header class="sticky top-0 z-60 border-b border-neutral-200 bg-white dark:border-neutral-700 dark:bg-neutral-900 py-4 header-container">
   <nav class="mx-auto max-w-350 px-4 sm:px-6 lg:px-8">
     <div class="flex h-16 items-center justify-between">
       <!-- Logo -->
       <div class="shrink-0">
         <a href="/" class="relative inline-block transition duration-250 ease-out before:content-[''] before:absolute before:inset-y-[-10px] before:inset-x-[-7px] active:scale-95 hover:text-[#025831] active:text-blue-500 dark:hover:text-yellow-400 dark:active:text-yellow-400 text-xl font-bold">
-          Stay Fresh Today
+          <img src="https://stayfreshtoday.com/wp-content/uploads/2025/12/cropped-stayfreshtoday-192x192.png" alt="" srcset="" class='width-[75px] h-[75px] inline-block mr-2' />
         </a>
       </div>
 
@@ -233,4 +233,20 @@ function toFrontendPath(wpLink) {
 
     debounceTimer = setTimeout(() => runSearch(query), 300);
   });
+  window.onscroll = function() {
+    var header = document.querySelector("header");
+    if (window.scrollY > 0) {
+      header.style.width = "100%";
+      header.style.maxWidth = "100%";
+    } else {
+      header.classList.remove("shadow-md");
+    }
+  };
 </script>
+<style>
+  .header-container{
+    max-width: 1150px;
+    margin: auto;
+    width: 95%;
+}
+</style>
