@@ -1,4 +1,9 @@
 @import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,wght@6..144,1..1000&display=swap');
+*{
+font-family: 'Poppins', sans-serif;
+
+}
 
 .card-hover-effect[data-astro-cid-upkumhrg]:hover:before {
     animation-play-state: running;
