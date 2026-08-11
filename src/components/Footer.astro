@@ -157,7 +157,7 @@ const posts = await response.json();
     </div>
 
   </div>
-    <style>
+    <style is:global>
         .main-footer {
     background-color: #000;
 }
@@ -170,6 +170,7 @@ const posts = await response.json();
 }
 .row.flex {
     gap: 10px;
+    flex-wrap: nowrap;
 }
 .tabrow:first-child {
     width: 31%;
@@ -351,5 +352,17 @@ section#simple-social-icons-2 {
 }
 p.ppa {
     margin-bottom: 0 !important;
+}
+@media screen and (min-width: 320px) and (max-width: 768px) {
+
+    .tabrow{
+        width: 100% !important;
+    }
+
+    .footer-container .row.flex {
+        flex-wrap: wrap;
+        max-width: 90%;
+        margin: auto;
+    }
 }
 </style>

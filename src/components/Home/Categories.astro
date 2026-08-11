@@ -1,63 +1,129 @@
-
 ---
-const { healthPosts,category,slug,color } = Astro.props;
+const { healthPosts, category, slug, color } = Astro.props;
 ---
-<script define:vars={{ healthPosts }}>
-  console.log(healthPosts);
-</script>
 
 <section
   class:list={[
-    "relative",
+    "relative overflow-hidden",
     color
       ? "text-white bg-[#6AB491] dark:text-gray-300 py-10"
-      : "text-[#025831] dark:text-gray-300 py-10",
+      : "text-[#025831] dark:text-gray-300 py-10  ",
   ]}
 > 
-  <div class='max-w-7xl px-4 sm:px-6 lg:px-8  m-auto '><div class="mb-12 flex items-center justify-between">
-   <h2 class="text-3xl font-bold">{category}</h2> 
-   {slug && (
-    <a href=`/category/${slug}` class="relative inline-block transition duration-250 ease-out before:content-[''] before:absolute before:inset-y-[-10px] before:inset-x-[-7px] active:scale-95 text-lg font-bold text-[#025831] underline-offset-4 underline decoration-transparent hover:decoration-current active:decoration-current dark:text-yellow-400"> View all posts &rarr; </a> 
-   )}
-    </div> <div class="grid grid-cols-1 gap-x-8 gap-y-10 sm:grid-cols-1 lg:grid-cols-3"> 
-        {healthPosts.map((post) => (
-<article class="group relative flex flex-col">  <div class="relative overflow-hidden bg-neutral-200 dark:bg-neutral-700 mb-4 aspect-video rounded-lg"> <img class="astro-cloudinary-cldimage absolute inset-0 h-full w-full object-cover transition duration-250 ease-out group-hover:scale-105 group-active:scale-105" 
-alt={post._embedded["wp:featuredmedia"][0].alt_text}
-loading="lazy" sizes="(max-width: 768px) 100vw, 33vw"  decoding="async" style="object-fit:cover;max-width:1600px;max-height:900px;aspect-ratio:1.7777777777777777;width:100%"  src={post._embedded["wp:featuredmedia"][0].source_url}> 
- </div> 
- <h3 class="mb-2 line-clamp-2 text-xl sm:text-xl lg:text-xl font-semibold transition-colors duration-250 ease-out group-hover:text-[#025831] group-active:text-[#025831] group-hover:underline group-hover:decoration-[#025831] dark:group-hover:text-[#025831] dark:group-active:text-[#025831]"> 
-  <a href={`/blog/${post.slug}`}  class="after:absolute after:inset-0 after:content-['']" title={post.title.rendered}>{post.title.rendered}</a> 
- </h3> 
-<span>
-   <p  class:list={[
-    "line-clamp-3",
-    color
-      ? "text-white"
-      : "text-gray-700 dark:text-gray-300",
-  ]}
->
-  {post.excerpt.rendered
-    .replace(/<[^>]*>/g, '')
-    .split(' ')
-    .slice(0, 10)
-    .join(' ')}...
-</p>
-</span>
-<div class="mt-3.5 flex flex-col items-start gap-y-4"> <div class="flex items-center gap-2 relative z-10"> 
-</div> 
-{/* <div class="flex flex-wrap gap-2 relative z-10"> <span class="rounded-md bg-neutral-200 px-2 py-1 text-sm text-neutral-950 dark:bg-neutral-700 dark:text-neutral-50"> client management </span><span class="rounded-md bg-neutral-200 px-2 py-1 text-sm text-neutral-950 dark:bg-neutral-700 dark:text-neutral-50"> sales and conversion </span><span class="rounded-md bg-neutral-200 px-2 py-1 text-sm text-neutral-950 dark:bg-neutral-700 dark:text-neutral-50"> social proof </span> </div>  */}
+  <div class='max-w-7xl m-auto px-[20px]  sm:px-6 lg:px-8 '>
+    <div class="mb-12 flex items-center justify-between">
+      <h2 class="text-xl xl:text-3xl font-bold">{category}</h2> 
+      {slug && (
+        <a href=`/category/${slug}` class="relative inline-block transition duration-250 ease-out before:content-[''] before:absolute before:inset-y-[-10px] before:inset-x-[-7px] active:scale-95 text-sm xl:text-lg font-bold text-[#025831] underline-offset-4 underline decoration-transparent hover:decoration-current active:decoration-current dark:text-yellow-400"> View all posts &rarr; </a> 
+      )}
+    </div>
 
-<div 
-class:list={[
-    "flex items-center gap-x-2 text-sm",
-    color
-      ? "text-white"
-      : "text-gray-700 dark:text-gray-300",
-  ]}
-> <time datetime="2025-08-07T08:41:00.000Z"> {new Date(post.date).toLocaleDateString("en-US", {
-          year: "numeric",
-          month: "short",
-          day: "numeric",
-        })}</time> </div> </div> </article>
-))}
-</div></div> </section>
+    <!-- Desktop: normal grid -->
+    <div class="hidden lg:grid grid-cols-3 gap-x-8 gap-y-10">
+      {healthPosts.map((post) => (
+        <article class="group relative flex flex-col">
+          <div class="relative overflow-hidden bg-neutral-200 dark:bg-neutral-700 mb-4 aspect-video rounded-lg">
+            <img
+              class="absolute inset-0 h-full w-full object-cover transition duration-250 ease-out group-hover:scale-105"
+              alt={post._embedded["wp:featuredmedia"][0].alt_text}
+              loading="lazy"
+              sizes="33vw"
+              decoding="async"
+              src={post._embedded["wp:featuredmedia"][0].source_url}
+            >
+          </div>
+          <h3 class="mb-2 line-clamp-2 text-xl font-semibold transition-colors duration-250 ease-out group-hover:text-[#025831] group-hover:underline group-hover:decoration-[#025831]">
+            <a href={`/blog/${post.slug}`} class="after:absolute after:inset-0 after:content-['']" title={post.title.rendered}>{post.title.rendered}</a>
+          </h3>
+          <p class:list={["line-clamp-3", color ? "text-white" : "text-gray-700 dark:text-gray-300"]}>
+            {post.excerpt.rendered.replace(/<[^>]*>/g, '').split(' ').slice(0, 10).join(' ')}...
+          </p>
+          <div class="mt-3.5 flex flex-col items-start gap-y-4">
+            <div class:list={["flex items-center gap-x-2 text-sm", color ? "text-white" : "text-gray-700 dark:text-gray-300"]}>
+              <time>{new Date(post.date).toLocaleDateString("en-US", { year: "numeric", month: "short", day: "numeric" })}</time>
+            </div>
+          </div>
+        </article>
+      ))}
+    </div>
+
+    <!-- Mobile: Swiper slider -->
+    <div class="lg:hidden">
+      <div class="swiper healthPostsSwiper">
+        <div class="swiper-wrapper">
+          {healthPosts.map((post) => (
+            <div class="swiper-slide">
+              <article class="group relative flex flex-col">
+                <div class="relative overflow-hidden bg-neutral-200 dark:bg-neutral-700 mb-4 aspect-video rounded-lg">
+                  <img
+                    class="absolute inset-0 h-full w-full object-cover"
+                    alt={post._embedded["wp:featuredmedia"][0].alt_text}
+                    loading="lazy"
+                    sizes="100vw"
+                    decoding="async"
+                    src={post._embedded["wp:featuredmedia"][0].source_url}
+                  >
+                </div>
+                <h3 class="mb-2 line-clamp-2 text-xl font-semibold">
+                  <a href={`/blog/${post.slug}`} class="after:absolute after:inset-0 after:content-['']" title={post.title.rendered}>{post.title.rendered}</a>
+                </h3>
+                <p class:list={["line-clamp-3", color ? "text-white" : "text-gray-700 dark:text-gray-300"]}>
+                  {post.excerpt.rendered.replace(/<[^>]*>/g, '').split(' ').slice(0, 10).join(' ')}...
+                </p>
+                <div class="mt-3.5 flex flex-col items-start gap-y-4">
+                  <div class:list={["flex items-center gap-x-2 text-sm", color ? "text-white" : "text-gray-700 dark:text-gray-300"]}>
+                    <time>{new Date(post.date).toLocaleDateString("en-US", { year: "numeric", month: "short", day: "numeric" })}</time>
+                  </div>
+                </div>
+              </article>
+            </div>
+          ))}
+        </div>
+        <div class="swiper-pagination"></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<style>
+  .healthPostsSwiper {
+    padding-bottom: 40px !important;
+    overflow: visible;
+  }
+  .healthPostsSwiper .swiper-slide {
+    width: 100%;
+  }
+  @media (min-width: 640px) {
+    .healthPostsSwiper .swiper-slide {
+      width: 60%;
+    }
+  }
+  .swiper-pagination-bullet {
+    background: #025831;
+    opacity: 0.4;
+  }
+  .swiper-pagination-bullet-active {
+    opacity: 1;
+  }
+  .max-w-7xl.m-auto.px-\[20px\].xl\:px-0 {
+    overflow: hidden;
+}
+</style>
+
+<script>
+  import Swiper from "swiper";
+  import { Pagination } from "swiper/modules";
+  import "swiper/css";
+  import "swiper/css/pagination";
+
+  new Swiper(".healthPostsSwiper", {
+    modules: [Pagination],
+    slidesPerView: "auto",
+    spaceBetween: 16,
+    pagination: {
+      el: ".swiper-pagination",
+      clickable: true,
+    },
+  });
+</script>
