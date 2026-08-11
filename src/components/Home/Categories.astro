@@ -14,7 +14,14 @@ const { healthPosts, category, slug, color } = Astro.props;
     <div class="mb-12 flex items-center justify-between">
       <h2 class="text-xl xl:text-3xl font-bold">{category}</h2> 
       {slug && (
-        <a href=`/category/${slug}` class="relative inline-block transition duration-250 ease-out before:content-[''] before:absolute before:inset-y-[-10px] before:inset-x-[-7px] active:scale-95 text-sm xl:text-lg font-bold text-[#025831] underline-offset-4 underline decoration-transparent hover:decoration-current active:decoration-current dark:text-yellow-400"> View all posts &rarr; </a> 
+        <a href=`/category/${slug}`     
+         class:list={[
+    "relative inline-block transition duration-250 ease-out before:content-[''] before:absolute before:inset-y-[-10px] before:inset-x-[-7px] active:scale-95 text-sm xl:text-lg font-bold  underline-offset-4 underline decoration-transparent hover:decoration-current active:decoration-current dark:text-yellow-400",
+    color
+      ? "text-[#fff]"
+      : "text-[#025831]",
+  ]}
+        class=""> View all posts &rarr; </a> 
       )}
     </div>
 

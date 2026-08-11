@@ -15,8 +15,9 @@ import Layout from "../layouts/Layout.astro";
 alt={post._embedded["wp:featuredmedia"][0].alt_text}
 loading="lazy" sizes="(max-width: 768px) 100vw, 33vw"  decoding="async" style="object-fit:cover;max-width:1600px;max-height:900px;aspect-ratio:1.7777777777777777;width:100%"  src={post._embedded["wp:featuredmedia"][0].source_url}> 
  </div> 
- <h3 class="mb-2 line-clamp-2 text-xl font-semibold transition-colors duration-250 ease-out group-hover:text-blue-500 group-active:text-blue-500 dark:group-hover:text-yellow-400 dark:group-active:text-yellow-400"> <a href={`/blog/${post.slug}`}  class="after:absolute after:inset-0 after:content-['']" title={post.title.rendered}>{post.title.rendered}</a> 
- </h3> 
+  <h3 class="mb-2 line-clamp-2 text-xl font-semibold transition-colors duration-250 ease-out group-hover:text-[#025831] group-hover:underline group-hover:decoration-[#025831]">
+            <a href={`/blog/${post.slug}`} class="after:absolute after:inset-0 after:content-['']" title={post.title.rendered}>{post.title.rendered}</a>
+          </h3> 
 <span>
    <p class="line-clamp-3 text-gray-700 dark:text-gray-300">
   {post.excerpt.rendered

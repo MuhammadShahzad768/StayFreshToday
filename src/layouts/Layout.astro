@@ -3,6 +3,7 @@ const { title = "My Astro Website",seoHead } = Astro.props;
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import '../styles/global.css';
+import ScrollToTopAstroComponent from "../components/scroll-to-top.astro";
 ---
 
 <!doctype html>
@@ -25,6 +26,7 @@ import '../styles/global.css';
   <Header />
   <main id="main" class="min-h-[calc(100vh-12rem)] td-blog-fitness">
     <div class='mx-auto py-12'>
+      <ScrollToTopAstroComponent/>
       <slot />
     </div>
   </main>
