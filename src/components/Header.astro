@@ -2,6 +2,27 @@
 // Header.astro
 // Update this to your WordPress REST API base URL (e.g. https://admin.yourdomain.com)
 const WP_API_URL = import.meta.env.PUBLIC_WP_API_URL || "https://admin.yourdomain.com";
+
+// ---------- Active link detection ----------
+const currentPath = Astro.url.pathname.replace(/\/+$/, "") || "/";
+
+const navLinks = [
+  { href: "/blog", label: "Blog" },
+  { href: "/about-us", label: "About" },
+  { href: "/contact-us", label: "Contact" },
+  { href: "/newsletter", label: "Newsletter" },
+  { href: "/usa-air-quality", label: "Air Quality" },
+];
+
+// Matches exact path, or any sub-path under it (e.g. /blog/my-post is "active" for /blog)
+function isActive(href) {
+  const cleanHref = href.replace(/\/+$/, "") || "/";
+  if (cleanHref === "/") return currentPath === "/";
+  return currentPath === cleanHref || currentPath.startsWith(cleanHref + "/");
+}
+
+// Shared "hover" look, reused as the permanent active state
+const activeClasses = "text-[#025831] dark:text-yellow-400 [background-size:100%_2px]";
 ---
 
 <header class="sticky top-0 z-[60] border-b border-neutral-200 bg-white dark:border-neutral-700 dark:bg-neutral-900 py-4 ">
@@ -17,21 +38,18 @@ const WP_API_URL = import.meta.env.PUBLIC_WP_API_URL || "https://admin.yourdomai
 
       <!-- Desktop nav links -->
       <div class="hidden lg:flex lg:items-center lg:space-x-8">
-        <a href="/blog" class="relative inline-block before:content-[''] before:absolute before:inset-y-[-10px] before:inset-x-[-7px] active:scale-95 hover:text-[#025831] active:text-[#025831] dark:hover:text-yellow-400 dark:active:text-yellow-400 bg-[linear-gradient(currentColor,currentColor)] bg-no-repeat [background-position:0_100%] [background-size:0%_2px] transition-[background-size] duration-250 ease-out hover:[background-size:100%_2px] active:[background-size:100%_2px] group-hover:[background-size:100%_2px]">
-          Blog
-        </a>
-        <a href="/about-us" class="relative inline-block before:content-[''] before:absolute before:inset-y-[-10px] before:inset-x-[-7px] active:scale-95 hover:text-[#025831] active:text-[#025831] dark:hover:text-yellow-400 dark:active:text-yellow-400 bg-[linear-gradient(currentColor,currentColor)] bg-no-repeat [background-position:0_100%] [background-size:0%_2px] transition-[background-size] duration-250 ease-out hover:[background-size:100%_2px] active:[background-size:100%_2px] group-hover:[background-size:100%_2px]">
-          About
-        </a>
-        <a href="/contact-us" class="relative inline-block before:content-[''] before:absolute before:inset-y-[-10px] before:inset-x-[-7px] active:scale-95 hover:text-[#025831] active:text-[#025831] dark:hover:text-yellow-400 dark:active:text-yellow-400 bg-[linear-gradient(currentColor,currentColor)] bg-no-repeat [background-position:0_100%] [background-size:0%_2px] transition-[background-size] duration-250 ease-out hover:[background-size:100%_2px] active:[background-size:100%_2px] group-hover:[background-size:100%_2px]">
-          Contact
-        </a>
-        <a href="/newsletter" class="relative inline-block before:content-[''] before:absolute before:inset-y-[-10px] before:inset-x-[-7px] active:scale-95 hover:text-[#025831] active:text-[#025831] dark:hover:text-yellow-400 dark:active:text-yellow-400 bg-[linear-gradient(currentColor,currentColor)] bg-no-repeat [background-position:0_100%] [background-size:0%_2px] transition-[background-size] duration-250 ease-out hover:[background-size:100%_2px] active:[background-size:100%_2px] group-hover:[background-size:100%_2px]">
-          Newsletter
-        </a>
-         <a href="/usa-air-quality" class="relative inline-block before:content-[''] before:absolute before:inset-y-[-10px] before:inset-x-[-7px] active:scale-95 hover:text-[#025831] active:text-[#025831] dark:hover:text-yellow-400 dark:active:text-yellow-400 bg-[linear-gradient(currentColor,currentColor)] bg-no-repeat [background-position:0_100%] [background-size:0%_2px] transition-[background-size] duration-250 ease-out hover:[background-size:100%_2px] active:[background-size:100%_2px] group-hover:[background-size:100%_2px]">
-         Air Quality
-        </a>
+        {navLinks.map((link) => (
+          <a
+            href={link.href}
+            class:list={[
+              "relative inline-block before:content-[''] before:absolute before:inset-y-[-10px] before:inset-x-[-7px] active:scale-95 hover:text-[#025831] active:text-[#025831] dark:hover:text-yellow-400 dark:active:text-yellow-400 bg-[linear-gradient(currentColor,currentColor)] bg-no-repeat [background-position:0_100%] [background-size:0%_2px] transition-[background-size] duration-250 ease-out hover:[background-size:100%_2px] active:[background-size:100%_2px] group-hover:[background-size:100%_2px]",
+              isActive(link.href) && activeClasses,
+            ]}
+            aria-current={isActive(link.href) ? "page" : undefined}
+          >
+            {link.label}
+          </a>
+        ))}
 
         <!-- Search trigger -->
         <button
@@ -84,10 +102,18 @@ const WP_API_URL = import.meta.env.PUBLIC_WP_API_URL || "https://admin.yourdomai
       class="pointer-events-none fixed inset-x-0 top-16 bottom-0 z-50 overflow-auto opacity-0 hidden -translate-y-2 transition-all duration-200 ease-out lg:hidden"
     >
       <div class="pointer-events-auto flex flex-col space-y-1 border-b border-neutral-200 bg-white px-2 pt-2 pb-3 shadow-lg dark:border-neutral-700 dark:bg-neutral-900 width-[100%]" style="width: 100%;">
-        <a href="/blog" class="border-b border-neutral-200 px-4 py-3 text-center text-lg font-medium dark:border-neutral-700">Blog</a>
-        <a href="/about-us" class="border-b border-neutral-200 px-4 py-3 text-center text-lg font-medium dark:border-neutral-700">About</a>
-        <a href="/contact-us" class="border-b border-neutral-200 px-4 py-3 text-center text-lg font-medium dark:border-neutral-700">Contact</a>
-        <a href="/newsletter" class="px-4 py-3 text-center text-lg font-medium">Newsletter</a>
+        {navLinks.map((link) => (
+          <a
+            href={link.href}
+            class:list={[
+              "border-b border-neutral-200 px-4 py-3 text-center text-lg font-medium dark:border-neutral-700",
+              isActive(link.href) && "text-[#025831] dark:text-yellow-400",
+            ]}
+            aria-current={isActive(link.href) ? "page" : undefined}
+          >
+            {link.label}
+          </a>
+        ))}
       </div>
     </div>
   </nav>
