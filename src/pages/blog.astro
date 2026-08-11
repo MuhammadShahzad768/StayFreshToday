@@ -8,8 +8,8 @@ const posts = await response.json();
 import Layout from "../layouts/Layout.astro";
 ---
 <Layout title="Blogs | Skincare &amp; Haircare | Health &amp; Nutrition Tips | Stayfreshtoday.com">
-<section> <div class="mb-12 flex items-center justify-between"> <h2 class="text-3xl font-bold">Blogs</h2> 
-   </div> <div class="grid grid-cols-1 gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-3"> 
+<section class='max-w-7xl px-4 sm:px-6 lg:px-8  m-auto '> <div class="mb-12 flex items-center justify-between "> <h2 class="text-3xl font-bold">Blogs</h2> 
+   </div> <div class="grid grid-cols-1 gap-x-8 gap-y-10 sm:grid-cols-1 lg:grid-cols-3"> 
         {posts.map((post) => (
 <article class="group relative flex flex-col">  <div class="relative overflow-hidden bg-neutral-200 dark:bg-neutral-700 mb-4 aspect-video rounded-lg"> <img class="astro-cloudinary-cldimage absolute inset-0 h-full w-full object-cover transition duration-250 ease-out group-hover:scale-105 group-active:scale-105" 
 alt={post._embedded["wp:featuredmedia"][0].alt_text}
