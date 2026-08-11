@@ -142,8 +142,14 @@ h3 {
 .ranking .row {
     gap: 30px;
     display: flex;
+    flex-wrap: wrap;
 }
 tbody tr {
     height: 60px;
+}
+@media screen and (max-width:768px) {
+    .col-md-6 {
+    width: 100%;
+}
 }
 </style>
