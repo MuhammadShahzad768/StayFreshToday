@@ -1,0 +1,139 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+const WP_API_URL = import.meta.env.PUBLIC_WP_API_URL || "https://admin.stayfreshtoday.com";
+const TURNSTILE_SITE_KEY = "0x4AAAAAABv63AU1dEDJLnVK";
+---
+
+<Layout>
+  <div class="px-4 sm:px-6 lg:px-8 mx-auto max-w-2xl py-12">
+    <h1 class="mb-12 text-center text-4xl font-bold">Newsletter</h1>
+
+    <div>
+      <form id="newsletter-form">
+        <div class="flex w-full flex-col gap-4 sm:flex-row sm:gap-2">
+          <input
+            type="email"
+            id="newsletter-email"
+            name="email"
+            placeholder="your@email.com"
+            required
+            maxlength="254"
+            autocomplete="email"
+            autocapitalize="off"
+            spellcheck="false"
+            class="w-full rounded-lg border-0 px-3.5 py-2 shadow-sm ring-1 ring-inset sm:text-sm sm:leading-6 transition-colors duration-200 focus:outline-none bg-white dark:bg-neutral-700 placeholder:text-neutral-500 dark:placeholder:text-neutral-400 ring-neutral-300 dark:ring-neutral-700 focus:ring-2 focus:ring-blue-500 dark:focus:ring-yellow-400"
+          />
+          <button
+            id="newsletter-submit"
+            type="submit"
+            disabled
+            class="flex items-center justify-center cursor-pointer rounded-lg px-3.5 py-2.5 text-sm font-semibold tracking-wide focus-visible:outline-2 focus-visible:outline-offset-2 active:scale-95 transition duration-300 disabled:opacity-50 disabled:cursor-not-allowed disabled:active:scale-100 bg-blue-600 text-white shadow-sm hover:bg-blue-500 focus-visible:outline-blue-600 active:bg-blue-500 dark:bg-yellow-400 dark:text-black dark:shadow-[0_0_18px_-6px_rgba(251,191,36,0.12),0_0_42px_-4px_rgba(251,191,36,0.12)] dark:hover:bg-yellow-300 dark:focus-visible:outline-yellow-400 dark:active:bg-yellow-300"
+          >
+            Subscribe
+          </button>
+        </div>
+
+        <div class="ts-wrap mt-4 flex justify-center">
+          <div
+            class="cf-turnstile"
+            data-sitekey={TURNSTILE_SITE_KEY}
+            data-size="normal"
+            data-action="newsletter"
+            data-appearance="always"
+            data-callback="onTurnstileSuccess"
+            data-expired-callback="onTurnstileExpired"
+          ></div>
+        </div>
+
+        <p id="newsletter-message" class="mt-4 text-center text-sm"></p>
+
+        <div class="mt-4 flex justify-center">
+          <div class="max-w-xl text-center text-sm leading-relaxed text-gray-700 dark:text-gray-300">
+            By subscribing, you agree to the
+            <a href="/terms-and-condiitons" class="relative inline-block transition duration-250 ease-out before:content-[''] before:absolute before:inset-y-[-10px] before:inset-x-[-7px] active:scale-95 text-sm font-medium underline underline-offset-4 hover:text-blue-500 active:text-blue-500 dark:hover:text-yellow-400 dark:active:text-yellow-400">
+              Terms &amp; Conditions
+            </a>
+            and
+            <a href="/privacy-policy" class="relative inline-block transition duration-250 ease-out before:content-[''] before:absolute before:inset-y-[-10px] before:inset-x-[-7px] active:scale-95 text-sm font-medium underline underline-offset-4 hover:text-blue-500 active:text-blue-500 dark:hover:text-yellow-400 dark:active:text-yellow-400">
+              Privacy Policy
+            </a>
+            . You can unsubscribe at any time.
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</Layout>
+
+<!-- Cloudflare Turnstile script -->
+<script is:inline src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+
+<script define:vars={{ WP_API_URL }}>
+  const form = document.getElementById("newsletter-form");
+  const emailInput = document.getElementById("newsletter-email");
+  const submitBtn = document.getElementById("newsletter-submit");
+  const messageEl = document.getElementById("newsletter-message");
+
+  let turnstileToken = null;
+
+  // Turnstile callbacks (Cloudflare script inhe globally call karega)
+  window.onTurnstileSuccess = function (token) {
+    turnstileToken = token;
+    submitBtn.disabled = false;
+  };
+
+  window.onTurnstileExpired = function () {
+    turnstileToken = null;
+    submitBtn.disabled = true;
+  };
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    const email = emailInput.value.trim();
+    if (!email) return;
+
+    if (!turnstileToken) {
+      messageEl.textContent = "Please complete the verification.";
+      messageEl.className = "mt-4 text-center text-sm text-red-600";
+      return;
+    }
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = "Subscribing...";
+    messageEl.textContent = "";
+    messageEl.className = "mt-4 text-center text-sm";
+
+    try {
+      const res = await fetch(`${WP_API_URL}/wp-json/newsletter/v1/subscribe`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          email,
+          turnstileToken,
+        }),
+      });
+
+      const data = await res.json();
+
+      if (res.ok && data.success) {
+        messageEl.textContent = data.message || "Successfully subscribed!";
+        messageEl.classList.add("text-green-600");
+        emailInput.value = "";
+        // Turnstile widget ko reset karo taake dobara verify ho sake
+        if (window.turnstile) window.turnstile.reset();
+        turnstileToken = null;
+      } else {
+        messageEl.textContent = data.message || "Something went wrong.";
+        messageEl.classList.add("text-red-600");
+      }
+    } catch (err) {
+      messageEl.textContent = "Network error. Please try again.";
+      messageEl.classList.add("text-red-600");
+    } finally {
+      submitBtn.disabled = !turnstileToken;
+      submitBtn.textContent = "Subscribe";
+    }
+  });
+</script>

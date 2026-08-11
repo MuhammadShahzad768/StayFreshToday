@@ -34,9 +34,9 @@ const seo = await seoRes.json();
 console.log("SEO:", seo);
 ---
 
-<Layout title={title} seoHead={seo.head}>
-
-  <h1 class="mb-12 text-center text-4xl font-bold">
+<Layout title={title} seoHead={seo.head} >
+<div class="max-w-7xl px-4 sm:px-6 lg:px-8">
+  <h1 class="mb-12 text-center text-4xl font-bold text-[#025831]">
     {title}
   </h1>
 
@@ -45,7 +45,7 @@ console.log("SEO:", seo);
     set:html={content}
   >
   </div>
-
+</div>
 </Layout>
 
 
