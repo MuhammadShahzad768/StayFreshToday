@@ -14,6 +14,12 @@ strong {
     color: #025831;
     font-size: 20px;
 }
+.toc-active {
+    color: #025831;
+    font-weight: 700;
+    font-size: 20px;
+    transition: all .5s ease;
+}
 .card-hover-effect[data-astro-cid-upkumhrg]:before {
     content: "";
     position: absolute;

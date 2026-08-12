@@ -11,16 +11,26 @@ const PrivacyPolicy = await response.json();
 const title = PrivacyPolicy[0]?.title?.rendered || "Privacy Policy";
 
 function fixEncoding(text) {
-  try {
-    return Buffer.from(text, "latin1").toString("utf8");
-  } catch {
-    return text; // agar already valid UTF-8 hai to fallback
-  }
+  return text
+    .replace(/�/g, "")
+    .replace(/&nbsp;/g, " ")
+    .replace(/&amp;/g, "&")
+    .replace(/&lt;/g, "<")
+    .replace(/&gt;/g, ">")
+    .replace(/&#8217;/g, "’")
+    .replace(/&#8216;/g, "‘")
+    .replace(/&#8220;/g, "“")
+    .replace(/&#8221;/g, "”")
+    .replace(/&#8211;/g, "–")
+    .replace(/&#8212;/g, "—");
 }
 
-const rawContent = PrivacyPolicy[0]?.content?.rendered || "";
 
+
+
+const rawContent = PrivacyPolicy[0]?.content?.rendered || "";
 const content = fixEncoding(rawContent);
+
 
 // Get Rank Math SEO
 const seoRes = await fetch(
@@ -35,7 +45,7 @@ console.log("SEO:", seo);
 ---
 
 <Layout title={title} seoHead={seo.head} >
-<div class="max-w-7xl px-4 sm:px-6 lg:px-8">
+<div class="max-w-7xl px-4 sm:px-6 lg:px-8 m-auto">
   <h1 class="mb-12 text-center text-4xl font-bold text-[#025831]">
     {title}
   </h1>

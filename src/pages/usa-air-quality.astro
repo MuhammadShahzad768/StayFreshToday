@@ -31,7 +31,6 @@ const seoRes = await fetch(
 
 const seo = await seoRes.json();
 
-console.log("SEO:", seo);
 ---
 
 <Layout title={title} seoHead={seo.head} >

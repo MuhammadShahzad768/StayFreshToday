@@ -4,7 +4,7 @@ import Layout from "../layouts/Layout.astro";
 const WP_API_URL = import.meta.env.PUBLIC_WP_API_URL || "https://stayfreshtoday.com";
 ---
 
-<Layout>
+<Layout title="Newsletter" >
   <div class="px-4 sm:px-6 lg:px-8 mx-auto max-w-2xl py-12">
     <h1 class="mb-12 text-center text-4xl font-bold text-[#025831]">Newsletter</h1>
 
@@ -34,19 +34,14 @@ const WP_API_URL = import.meta.env.PUBLIC_WP_API_URL || "https://stayfreshtoday.
 
         <p id="newsletter-message" class="mt-4 text-center text-sm"></p>
 
-        <div class="mt-4 flex justify-center">
-          <div class="max-w-xl text-center text-sm leading-relaxed text-gray-700 dark:text-gray-300">
-            By subscribing, you agree to the
-            <a href="/terms-and-condiitons" class="relative inline-block transition duration-250 ease-out before:content-[''] before:absolute before:inset-y-[-10px] before:inset-x-[-7px] active:scale-95 text-sm font-medium underline underline-offset-4 hover:text-blue-500 active:text-blue-500 dark:hover:text-yellow-400 dark:active:text-yellow-400">
-              Terms &amp; Conditions
-            </a>
-            and
-            <a href="/privacy-policy" class="relative inline-block transition duration-250 ease-out before:content-[''] before:absolute before:inset-y-[-10px] before:inset-x-[-7px] active:scale-95 text-sm font-medium underline underline-offset-4 hover:text-blue-500 active:text-blue-500 dark:hover:text-yellow-400 dark:active:text-yellow-400">
-              Privacy Policy
-            </a>
-            . You can unsubscribe at any time.
-          </div>
-        </div>
+       <div class="mt-4 flex justify-center">
+  <div class="max-w-xl text-center text-sm leading-relaxed text-gray-700 dark:text-gray-300">
+    By subscribing, you agree to the
+    <a href="/terms-and-condiitons" class="px-2 relative inline-block transition duration-250 ease-out before:content-[''] before:absolute before:inset-y-[-10px] before:inset-x-[-7px] active:scale-95 text-sm font-medium underline underline-offset-4 hover:text-[#03744A] active:text-blue-500 dark:hover:text-yellow-400 dark:active:text-yellow-400">Terms &amp; Conditions</a>
+    and
+    <a href="/privacy-policy" class="pl-2 relative inline-block transition duration-250 ease-out before:content-[''] before:absolute before:inset-y-[-10px] before:inset-x-[-7px] active:scale-95 text-sm font-medium underline underline-offset-4 hover:text-[#03744A] active:text-blue-500 dark:hover:text-yellow-400 dark:active:text-yellow-400">Privacy Policy</a>. You can unsubscribe at any time.
+  </div>
+</div>
       </form>
     </div>
   </div>
