@@ -45,7 +45,7 @@ const fitnessCategoryResponse = await fetch(
 const fitnessCategory = await fitnessCategoryResponse.json();
 const fitnessCategoryId = fitnessCategory[0].id;
 const fitnessPostsResponse = await fetch(
-  `https://stayfreshtoday.com/wp-json/wp/v2/posts?categories=${fitnessCategoryId}&_embed&per_page=3`
+  `${SiteName}/wp-json/wp/v2/posts?categories=${fitnessCategoryId}&_embed&per_page=3`
 );
 const fitnessPosts = await fitnessPostsResponse.json();
 
@@ -54,11 +54,17 @@ const latestPostsResponse = await fetch(
   `${SiteName}/wp-json/wp/v2/posts?_embed&per_page=3`
 );
 const latestPosts = await latestPostsResponse.json();	
+// Get Rank Math SEO
+const seoRes = await fetch(
+  `${SiteName}/wp-json/rankmath/v1/getHead?url=${encodeURIComponent(`${SiteName}/about-us`)}`
+);
+
+const seo = await seoRes.json();
 ---
 
 <Layout title="Beauty Tips | Skincare &amp; Haircare | Health &amp; Nutrition Tips | Stayfreshtoday.com" seoHead={seoData.head}>
 
-  <Banner posts={posts} />
+  <Banner posts={posts} seoHead={seo.head}/>
   <Categories healthPosts={healthPosts} category="Health" slug="health" color={true}/>
   <Categories healthPosts={beautyTipsPosts} category="Beauty Tips" slug="beauty-tips"/>
   <Categories healthPosts={fitnessPosts} category="Fitness & Exercise" slug="fitness-and-exercise" color={true}/>
