@@ -2,7 +2,7 @@
 import Layout from "../../layouts/Layout.astro";
 
 export async function getStaticPaths() {
-const SiteName = import.meta.env.SITE_NAME;
+const SiteName = import.meta.env.SITE_NAMEb || "stayfreshtoday.com";
   const response = await fetch(
     `${SiteName}/wp-json/wp/v2/posts?per_page=100&_embed`
   );

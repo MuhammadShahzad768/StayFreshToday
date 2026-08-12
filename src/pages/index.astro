@@ -2,14 +2,14 @@
 import Layout from "../layouts/Layout.astro";
 import Banner from "../components/Home/Banner.astro";
 import Categories from "../components/Home/Categories.astro";
-const SiteName = import.meta.env.SITE_NAME;
+const SiteName = import.meta.env.SITE_NAMEb || "stayfreshtoday.com";
 
 const response = await fetch(
   `${SiteName}/wp-json/wp/v2/posts?per_page=3&_embed`
 );
 
 const posts = await response.json();
-const seoUrl = "https://stayfreshtoday.com/";
+const seoUrl = import.meta.env.SITE_NAMEb || "stayfreshtoday.com";
 
 const seoResponse = await fetch(
   `${SiteName}/wp-json/rankmath/v1/getHead?url=${encodeURIComponent(seoUrl)}`

@@ -1,7 +1,7 @@
 ---
 import Layout from "../layouts/Layout.astro";
 
-const WP_API_URL = import.meta.env.PUBLIC_WP_API_URL || "https://stayfreshtoday.com";
+const SiteName = import.meta.env.SITE_NAMEb || "stayfreshtoday.com";
 ---
 
 <Layout title="Newsletter" >
@@ -47,7 +47,7 @@ const WP_API_URL = import.meta.env.PUBLIC_WP_API_URL || "https://stayfreshtoday.
   </div>
 </Layout>
 
-<script define:vars={{ WP_API_URL }}>
+<script define:vars={{ SiteName }}>
   const form = document.getElementById("newsletter-form");
   const emailInput = document.getElementById("newsletter-email");
   const submitBtn = document.getElementById("newsletter-submit");
@@ -65,7 +65,7 @@ const WP_API_URL = import.meta.env.PUBLIC_WP_API_URL || "https://stayfreshtoday.
     messageEl.className = "mt-4 text-center text-sm";
 
     try {
-      const baseUrl = WP_API_URL.replace(/\/$/, "");
+      const baseUrl = SiteName.replace(/\/$/, "");
       const res = await fetch(`${baseUrl}/wp-json/newsletter/v1/subscribe`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },

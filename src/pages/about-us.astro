@@ -1,8 +1,8 @@
 ---
 import Layout from "../layouts/Layout.astro";
-
+const SiteName = import.meta.env.SITE_NAMEb || "stayfreshtoday.com";
 const response = await fetch(
-  "https://stayfreshtoday.com/wp-json/wp/v2/pages?slug=about-us"
+  `${SiteName}/wp-json/wp/v2/pages?slug=about-us`
 );
 
 const About = await response.json();
@@ -12,12 +12,10 @@ const content = About[0]?.content?.rendered || "";
 
 // Get Rank Math SEO
 const seoRes = await fetch(
-  "https://stayfreshtoday.com/wp-json/rankmath/v1/getHead?url=https://stayfreshtoday.com/about-us/"
+  `${SiteName}/wp-json/rankmath/v1/getHead?url=${encodeURIComponent(`${SiteName}/about-us`)}`
 );
 
 const seo = await seoRes.json();
-
-console.log("SEO:", seo);
 ---
 
 <Layout title={About[0].title.rendered } seoHead={seo.head}>
