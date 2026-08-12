@@ -20,7 +20,7 @@ const SiteName = import.meta.env.SITE_NAMEb || "https://stayfreshtoday.com";
     }
   }));
 }
-const SiteName = import.meta.env.SITE_NAME;
+const SiteName = import.meta.env.SITE_NAMEb || "https://stayfreshtoday.com";
 const { post, posts, index } = Astro.props;
 
 const previousPost = posts[index + 1];
