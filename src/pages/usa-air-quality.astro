@@ -1,7 +1,7 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import { marked } from "marked";
-const SiteName = import.meta.env.SITE_NAMEb || "stayfreshtoday.com";
+const SiteName = import.meta.env.SITE_NAMEb || "https://stayfreshtoday.com";
 const response = await fetch(
   `${SiteName}/wp-json/wp/v2/pages?slug=usa-air-quality`
 );
