@@ -2,14 +2,14 @@
 import Layout from "../layouts/Layout.astro";
 import Banner from "../components/Home/Banner.astro";
 import Categories from "../components/Home/Categories.astro";
-const SiteName = import.meta.env.SITE_NAMEb || "https://stayfreshtoday.com";
+const SiteName = import.meta.env.SITE_NAME || "https://stayfreshtoday.com";
 
 const response = await fetch(
   `${SiteName}/wp-json/wp/v2/posts?per_page=3&_embed`
 );
 
 const posts = await response.json();
-const seoUrl = import.meta.env.SITE_NAMEb || "stayfreshtoday.com";
+const seoUrl = import.meta.env.SITE_NAME || "https://stayfreshtoday.com";
 
 const seoResponse = await fetch(
   `${SiteName}/wp-json/rankmath/v1/getHead?url=${encodeURIComponent(seoUrl)}`
@@ -54,17 +54,12 @@ const latestPostsResponse = await fetch(
   `${SiteName}/wp-json/wp/v2/posts?_embed&per_page=3`
 );
 const latestPosts = await latestPostsResponse.json();	
-// Get Rank Math SEO
-const seoRes = await fetch(
-  `${SiteName}/wp-json/rankmath/v1/getHead?url=${encodeURIComponent(`${SiteName}/about-us`)}`
-);
 
-const seo = await seoRes.json();
 ---
 
 <Layout title="Beauty Tips | Skincare &amp; Haircare | Health &amp; Nutrition Tips | Stayfreshtoday.com" seoHead={seoData.head}>
 
-  <Banner posts={posts} seoHead={seo.head}/>
+  <Banner posts={posts} />
   <Categories healthPosts={healthPosts} category="Health" slug="health" color={true}/>
   <Categories healthPosts={beautyTipsPosts} category="Beauty Tips" slug="beauty-tips"/>
   <Categories healthPosts={fitnessPosts} category="Fitness & Exercise" slug="fitness-and-exercise" color={true}/>
