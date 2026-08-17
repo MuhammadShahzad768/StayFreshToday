@@ -3,7 +3,7 @@ import Layout from "../../layouts/Layout.astro";
 
 
 export async function getStaticPaths() {
-const SiteName = import.meta.env.SITE_NAME || "https://stayfreshtoday.com";
+const SiteName = import.meta.env.SITE_NAME || "https://admin.stayfreshtoday.com";
   const response = await fetch(
     `${SiteName}/wp-json/wp/v2/categories`
   );
@@ -38,7 +38,7 @@ function decodeHTML(html) {
 
 const { category } = Astro.props;
 
-const SiteName = import.meta.env.SITE_NAME || "https://stayfreshtoday.com";
+const SiteName = import.meta.env.SITE_NAME || "https://admin.stayfreshtoday.com/";
 const postsResponse = await fetch(
   `${SiteName}/wp-json/wp/v2/posts?categories=${category.id}&_embed`
 );
