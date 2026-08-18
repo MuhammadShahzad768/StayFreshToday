@@ -10,6 +10,9 @@
     animation-play-state: running;
     opacity: 1;
 }
+button#prev, button#next {
+    cursor: pointer;
+}
 strong {
     color: #025831;
     font-size: 20px;
