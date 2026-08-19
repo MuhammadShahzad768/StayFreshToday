@@ -1,6 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
-const SiteName = import.meta.env.SITE_NAMEb || "https://stayfreshtoday.com";
+const SiteName = import.meta.env.SITE_NAMEb || "https://admin.stayfreshtoday.com";
 const response = await fetch(
   `${SiteName}/wp-json/wp/v2/pages?slug=contact-us`
 );
