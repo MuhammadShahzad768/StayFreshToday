@@ -1,31 +1,53 @@
 ---
 import Layout from "../layouts/Layout.astro";
-const SiteName = import.meta.env.SITE_NAMEb || "https://admin.stayfreshtoday.com";
-const response = await fetch(
-  `${SiteName}/wp-json/wp/v2/pages?slug=about-us`
-);
 
-const About = await response.json();
+const SiteName = import.meta.env.SITE_NAME || "https://admin.stayfreshtoday.com";
+
+const fetchOptions = {
+  headers: {
+    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
+    "Accept": "application/json",
+  },
+};
+
+async function safeFetchJSON(url) {
+  try {
+    const res = await fetch(url, fetchOptions);
+    const text = await res.text();
+    try {
+      return JSON.parse(text);
+    } catch (parseErr) {
+      console.error(`Invalid JSON from ${url}. Status: ${res.status}. Body:`, text.slice(0, 300));
+      return null;
+    }
+  } catch (fetchErr) {
+    console.error(`Fetch failed for ${url}:`, fetchErr);
+    return null;
+  }
+}
+
+const aboutData = await safeFetchJSON(`${SiteName}/wp-json/wp/v2/pages?slug=about-us`);
+const About = Array.isArray(aboutData) ? aboutData : [];
 
 const title = About[0]?.title?.rendered || "About";
 const content = About[0]?.content?.rendered || "";
 
-// Get Rank Math SEO
-const seoRes = await fetch(
-  `${SiteName}/wp-json/rankmath/v1/getHead?url=${encodeURIComponent(`${SiteName}/about-us`)}`
-);
-
-const seo = await seoRes.json();
+const seoUrl = `${SiteName}/wp-json/rankmath/v1/getHead?url=${encodeURIComponent(`${SiteName}/about-us`)}`;
+const seo = (await safeFetchJSON(seoUrl)) || {};
 ---
 
-<Layout title={About[0].title.rendered } seoHead={seo.head}>
-  <section class="max-w-7xl px-4 sm:px-6 lg:px-8  m-auto ">
+<Layout title={title} seoHead={seo?.head}>
+  <section class="max-w-7xl px-4 sm:px-6 lg:px-8 m-auto">
     <h1 class="mb-12 text-center text-4xl font-bold text-[#025831]">{title}</h1>
-    <div class="font-size prose prose-lg dark:prose-invert max-w-none text-black dark:text-neutral-100 flex flex-col gap-5 font-[30px]" set:html={content}></div>
+    <div
+      class="font-size prose prose-lg dark:prose-invert max-w-none text-black dark:text-neutral-100 flex flex-col gap-5"
+      set:html={content}
+    ></div>
   </section>
 </Layout>
+
 <style>
-.font-size p{
-    font-size: 1.125rem;
+.font-size p {
+  font-size: 1.125rem;
 }
-    </style>
+</style>
