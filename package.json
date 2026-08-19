@@ -15,6 +15,7 @@
     "@tailwindcss/vite": "^4.3.3",
     "astro": "^7.1.6",
     "he": "^1.2.0",
+    "html-entities": "^2.6.0",
     "marked": "^18.0.9",
     "swiper": "^14.1.0",
     "tailwindcss": "^4.3.3"

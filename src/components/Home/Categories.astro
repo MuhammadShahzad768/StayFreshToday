@@ -1,5 +1,6 @@
 ---
 const { healthPosts, category, slug, color } = Astro.props;
+import { decode } from "html-entities";
 ---
 
 <section
@@ -40,7 +41,13 @@ const { healthPosts, category, slug, color } = Astro.props;
             >
           </div>
           <h3 class="mb-2 line-clamp-2 text-xl font-semibold transition-colors duration-250 ease-out group-hover:text-[#025831] group-hover:underline group-hover:decoration-[#025831]">
-            <a href={`/blog/${post.slug}`} class="after:absolute after:inset-0 after:content-['']" title={post.title.rendered}>{post.title.rendered}</a>
+            <a
+  href={`/blog/${post.slug}`}
+  class="after:absolute after:inset-0 after:content-['']"
+  title={decode(post.title.rendered)}
+>
+  {decode(post.title.rendered)}
+</a>
           </h3>
           <p class:list={["line-clamp-3", color ? "text-white" : "text-gray-700 dark:text-gray-300"]}>
             {post.excerpt.rendered.replace(/<[^>]*>/g, '').split(' ').slice(0, 10).join(' ')}...
@@ -133,4 +140,11 @@ const { healthPosts, category, slug, color } = Astro.props;
       clickable: true,
     },
   });
+  
+  function decodeHTML(html) {
+    const txt = document.createElement("textarea");
+    txt.innerHTML = html;
+    return txt.value;
+  }
+  
 </script>
