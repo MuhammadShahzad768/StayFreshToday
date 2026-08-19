@@ -4,7 +4,7 @@ import Layout from "../../layouts/Layout.astro";
 export async function getStaticPaths() {
 const SiteName = import.meta.env.SITE_NAME || "https://admin.stayfreshtoday.com";
   const response = await fetch(
-    `${SiteName}/wp-json/wp/v2/posts?per_page=100&_embed`
+    `${SiteName}/wp-json/wp/v2/posts?per_page=1&_embed`
   );
 
   const posts = await response.json();
@@ -20,7 +20,7 @@ const SiteName = import.meta.env.SITE_NAME || "https://admin.stayfreshtoday.com"
     }
   }));
 }
-const SiteName = import.meta.env.SITE_NAMEb || "https://admin.stayfreshtoday.com";
+const SiteName = import.meta.env.SITE_NAME || "https://admin.stayfreshtoday.com";
 const { post, posts, index } = Astro.props;
 
 const previousPost = posts[index + 1];
