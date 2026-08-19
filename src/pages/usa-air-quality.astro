@@ -47,7 +47,12 @@ const seo = await seoRes.json();
 </div>
 </Layout>
 
-
+<script>
+    let images_url = document.querySelectorAll(".ranking__table img");
+images_url.forEach((img) => {
+  img.src = img.src.replace("https://stayfreshtoday.com","https://admin.stayfreshtoday.com");
+});
+</script>
 <style is:global>
 .font-size p {
   font-size: 1.125rem;

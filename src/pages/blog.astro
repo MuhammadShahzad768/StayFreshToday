@@ -1,166 +1,232 @@
 ---
 import Layout from "../layouts/Layout.astro";
-const SiteName = import.meta.env.SITE_NAMEb || "https://admin.stayfreshtoday.com";
+
+const SiteName =
+  import.meta.env.SITE_NAME || "https://admin.stayfreshtoday.com";
+
 const response = await fetch(
-  `${SiteName}/wp-json/wp/v2/posts?per_page=100&_embed` 
+  `${SiteName}/wp-json/wp/v2/posts?per_page=100&_embed`
 );
 
 const posts = await response.json();
-
-const postsJson = JSON.stringify(posts);
 ---
 
 <Layout title="Blogs | Skincare & Haircare | Health & Nutrition Tips | Stayfreshtoday.com">
 
-<section class="max-w-7xl px-4 sm:px-6 lg:px-8 m-auto">
+  <section class="max-w-7xl px-4 sm:px-6 lg:px-8 m-auto">
 
-<div class="mb-12 flex items-center justify-center">
-<h2 class="text-center text-4xl font-bold text-[#025831] ">Blogs</h2>
-</div>
+    <!-- Heading -->
+    <div class="mb-12 flex items-center justify-center">
+      <h2 class="text-center text-4xl font-bold text-[#025831]">
+        Blogs
+      </h2>
+    </div>
 
 
-<div 
-id="posts"
-class="grid grid-cols-1 gap-x-8 gap-y-10 sm:grid-cols-1 lg:grid-cols-3"
->
-</div>
+    <!-- Posts -->
+    <div
+      id="posts"
+      class="grid grid-cols-1 gap-x-8 gap-y-10 sm:grid-cols-1 lg:grid-cols-3"
+    >
+    </div>
 
 
-<div class="flex justify-center items-center gap-4 mt-10">
+    <!-- Pagination -->
+    <div
+      id="pagination"
+      class="hidden justify-center items-center gap-4 mt-10"
+    >
 
-<button id="prev" class="px-4 py-2 bg-gray-200 rounded">
-Previous
-</button>
+      <button
+        id="prev"
+        class="px-4 py-2 bg-gray-200 rounded disabled:opacity-50 disabled:cursor-not-allowed"
+      >
+        Previous
+      </button>
 
-<span id="pageNumber"></span>
+      <span id="pageNumber"></span>
 
-<button id="next" class="px-4 py-2 bg-gray-200 rounded">
-Next
-</button>
+      <button
+        id="next"
+        class="px-4 py-2 bg-gray-200 rounded disabled:opacity-50 disabled:cursor-not-allowed"
+      >
+        Next
+      </button>
 
-</div>
+    </div>
 
+  </section>
 
-</section>
 
+  <script define:vars={{ posts }}>
 
-<script define:vars={{ posts }}>
+    const allPosts = posts;
 
-const allPosts = posts;
+    const perPage = 9;
 
-const perPage = 9;
+    let currentPage = 1;
 
-let currentPage = 1;
+    const totalPages = Math.ceil(allPosts.length / perPage);
 
-const totalPages = Math.ceil(allPosts.length / perPage);
 
+    // Elements
+    const container = document.querySelector("#posts");
+    const pageNumber = document.querySelector("#pageNumber");
+    const pagination = document.querySelector("#pagination");
+    const prevButton = document.querySelector("#prev");
+    const nextButton = document.querySelector("#next");
 
-const container = document.querySelector("#posts");
-const pageNumber = document.querySelector("#pageNumber");
 
+    // Render posts
+    function renderPosts() {
 
-function renderPosts(){
+      const start = (currentPage - 1) * perPage;
 
-const start = (currentPage - 1) * perPage;
+      const currentPosts = allPosts.slice(
+        start,
+        start + perPage
+      );
 
-const currentPosts = allPosts.slice(
-start,
-start + perPage
-);
 
+      container.innerHTML = currentPosts.map(post => `
 
-container.innerHTML = currentPosts.map(post => `
+        <article class="group relative flex flex-col">
 
-<article class="group relative flex flex-col">
+          <!-- Featured Image -->
+          <div
+            class="relative overflow-hidden bg-neutral-200 dark:bg-neutral-700 mb-4 aspect-video rounded-lg"
+          >
 
-<div class="relative overflow-hidden bg-neutral-200 dark:bg-neutral-700 mb-4 aspect-video rounded-lg">
+            <img
+              class="absolute inset-0 h-full w-full object-cover transition duration-250 ease-out group-hover:scale-105"
+              src="${post._embedded?.['wp:featuredmedia']?.[0]?.source_url || ''}"
+              alt="${post._embedded?.['wp:featuredmedia']?.[0]?.alt_text || ''}"
+              loading="lazy"
+            />
 
-<img
-class="absolute inset-0 h-full w-full object-cover transition duration-250 ease-out group-hover:scale-105"
-src="${post._embedded['wp:featuredmedia']?.[0]?.source_url || ''}"
-alt="${post._embedded['wp:featuredmedia']?.[0]?.alt_text || ''}"
-loading="lazy"
-/>
+          </div>
 
-</div>
 
+          <!-- Title -->
+          <h3
+            class="mb-2 line-clamp-2 text-xl font-semibold transition-colors duration-250 ease-out group-hover:text-[#025831] group-hover:underline"
+          >
 
-<h3 class="mb-2 line-clamp-2 text-xl font-semibold transition-colors duration-250 ease-out group-hover:text-[#025831] group-hover:underline">
+            <a
+              href="/blog/${post.slug}"
+              class="after:absolute after:inset-0 after:content-['']"
+            >
+              ${post.title?.rendered || ""}
+            </a>
 
-<a href="/blog/${post.slug}"
-class="after:absolute after:inset-0 after:content-['']">
+          </h3>
 
-${post.title.rendered}
 
-</a>
+          <!-- Excerpt -->
+          <p class="line-clamp-3 text-gray-700 dark:text-gray-300">
 
-</h3>
+            ${
+              post.excerpt?.rendered
+                ?.replace(/<[^>]*>/g, "")
+                .split(" ")
+                .slice(0, 10)
+                .join(" ") || ""
+            }...
 
+          </p>
 
-<p class="line-clamp-3 text-gray-700 dark:text-gray-300">
 
-${post.excerpt.rendered
-.replace(/<[^>]*>/g,'')
-.split(" ")
-.slice(0,10)
-.join(" ")}...
+          <!-- Date -->
+          <div class="mt-3 text-sm text-gray-700 dark:text-gray-300">
 
-</p>
+            ${
+              post.date
+                ? new Date(post.date).toLocaleDateString("en-US", {
+                    year: "numeric",
+                    month: "short",
+                    day: "numeric"
+                  })
+                : ""
+            }
 
+          </div>
 
-<div class="mt-3 text-sm text-gray-700 dark:text-gray-300">
+        </article>
 
-${new Date(post.date).toLocaleDateString("en-US",{
-year:"numeric",
-month:"short",
-day:"numeric"
-})}
+      `).join("");
 
-</div>
 
+      /*
+       * Pagination
+       *
+       * Agar total pages 1 hain
+       * to pagination hidden rahegi.
+       */
+      if (totalPages > 1) {
 
-</article>
+        pagination.classList.remove("hidden");
+        pagination.classList.add("flex");
 
-`).join("");
+        pageNumber.textContent =
+          `Page ${currentPage} of ${totalPages}`;
 
+        // Previous button
+        prevButton.disabled = currentPage === 1;
 
+        // Next button
+        nextButton.disabled = currentPage === totalPages;
 
-pageNumber.innerHTML = 
-`Page ${currentPage} of ${totalPages}`;
+      } else {
 
-}
+        pagination.classList.add("hidden");
+        pagination.classList.remove("flex");
 
+      }
 
+    }
 
-document.querySelector("#next").onclick = ()=>{
 
-if(currentPage < totalPages){
+    // Next button
+    nextButton.addEventListener("click", () => {
 
-currentPage++;
+      if (currentPage < totalPages) {
 
-renderPosts();
+        currentPage++;
 
-}
+        renderPosts();
 
-};
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth"
+        });
 
+      }
 
+    });
 
-document.querySelector("#prev").onclick = ()=>{
 
-if(currentPage > 1){
+    // Previous button
+    prevButton.addEventListener("click", () => {
 
-currentPage--;
+      if (currentPage > 1) {
 
-renderPosts();
+        currentPage--;
 
-}
+        renderPosts();
 
-};
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth"
+        });
 
+      }
 
-renderPosts();
+    });
 
-</script>
+
+    // Initial render
+    renderPosts();
+
+  </script>
 
 </Layout>
