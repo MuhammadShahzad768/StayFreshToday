@@ -13,6 +13,7 @@
 button#prev, button#next {
     cursor: pointer;
 }
+
 strong {
     color: #025831;
     font-size: 20px;
