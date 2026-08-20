@@ -7,8 +7,8 @@ import { decode } from "html-entities";
   class:list={[
     "relative overflow-hidden",
     color
-      ? "text-white bg-[#6AB491] dark:text-gray-300 py-10"
-      : "text-[#025831] dark:text-gray-300 py-10  ",
+      ? "text-white bg-[#6AB491]  py-10"
+      : "text-[#025831]  py-10  ",
   ]}
 > 
   <div class='max-w-7xl m-auto px-[20px]  sm:px-6 lg:px-8 '>
@@ -17,7 +17,7 @@ import { decode } from "html-entities";
       {slug && (
         <a href=`/category/${slug}`     
          class:list={[
-    "relative inline-block transition duration-250 ease-out before:content-[''] before:absolute before:inset-y-[-10px] before:inset-x-[-7px] active:scale-95 text-sm xl:text-lg font-bold  underline-offset-4 underline decoration-transparent hover:decoration-current active:decoration-current dark:text-yellow-400",
+    "relative inline-block transition duration-250 ease-out before:content-[''] before:absolute before:inset-y-[-10px] before:inset-x-[-7px] active:scale-95 text-sm xl:text-lg font-bold  underline-offset-4 underline decoration-transparent hover:decoration-current active:decoration-current ",
     color
       ? "text-[#fff]"
       : "text-[#025831]",
@@ -30,7 +30,7 @@ import { decode } from "html-entities";
     <div class="hidden lg:grid grid-cols-3 gap-x-8 gap-y-10">
       {healthPosts.map((post) => (
         <article class="group relative flex flex-col">
-          <div class="relative overflow-hidden bg-neutral-200 dark:bg-neutral-700 mb-4 aspect-video rounded-lg">
+          <div class="relative overflow-hidden bg-neutral-200  mb-4 aspect-video rounded-lg">
             <img
               class="absolute inset-0 h-full w-full object-cover transition duration-250 ease-out group-hover:scale-105"
               alt={post._embedded["wp:featuredmedia"][0].alt_text}
@@ -49,11 +49,11 @@ import { decode } from "html-entities";
   {decode(post.title.rendered)}
 </a>
           </h3>
-          <p class:list={["line-clamp-3", color ? "text-white" : "text-gray-700 dark:text-gray-300"]}>
+          <p class:list={["line-clamp-3", color ? "text-white" : "text-gray-700 "]}>
             {post.excerpt.rendered.replace(/<[^>]*>/g, '').split(' ').slice(0, 10).join(' ')}...
           </p>
           <div class="mt-3.5 flex flex-col items-start gap-y-4">
-            <div class:list={["flex items-center gap-x-2 text-sm", color ? "text-white" : "text-gray-700 dark:text-gray-300"]}>
+            <div class:list={["flex items-center gap-x-2 text-sm", color ? "text-white" : "text-gray-700 "]}>
               <time>{new Date(post.date).toLocaleDateString("en-US", { year: "numeric", month: "short", day: "numeric" })}</time>
             </div>
           </div>
@@ -68,7 +68,7 @@ import { decode } from "html-entities";
           {healthPosts.map((post) => (
             <div class="swiper-slide">
               <article class="group relative flex flex-col">
-                <div class="relative overflow-hidden bg-neutral-200 dark:bg-neutral-700 mb-4 aspect-video rounded-lg">
+                <div class="relative overflow-hidden bg-neutral-200  mb-4 aspect-video rounded-lg">
                   <img
                     class="absolute inset-0 h-full w-full object-cover"
                     alt={post._embedded["wp:featuredmedia"][0].alt_text}
@@ -81,11 +81,11 @@ import { decode } from "html-entities";
                 <h3 class="mb-2 line-clamp-2 text-xl font-semibold">
                   <a href={`/blog/${post.slug}`} class="after:absolute after:inset-0 after:content-['']" title={post.title.rendered}>{post.title.rendered}</a>
                 </h3>
-                <p class:list={["line-clamp-3", color ? "text-white" : "text-gray-700 dark:text-gray-300"]}>
+                <p class:list={["line-clamp-3", color ? "text-white" : "text-gray-700 "]}>
                   {post.excerpt.rendered.replace(/<[^>]*>/g, '').split(' ').slice(0, 10).join(' ')}...
                 </p>
                 <div class="mt-3.5 flex flex-col items-start gap-y-4">
-                  <div class:list={["flex items-center gap-x-2 text-sm", color ? "text-white" : "text-gray-700 dark:text-gray-300"]}>
+                  <div class:list={["flex items-center gap-x-2 text-sm", color ? "text-white" : "text-gray-700 "]}>
                     <time>{new Date(post.date).toLocaleDateString("en-US", { year: "numeric", month: "short", day: "numeric" })}</time>
                   </div>
                 </div>

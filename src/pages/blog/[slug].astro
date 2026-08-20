@@ -36,9 +36,9 @@ const seo = await seoRes.json();
 <html>
 <body>
 <Layout title={post.title.rendered} seoHead={seo.head}>
-    <button id="open-toc-button" aria-label="Open table of contents" class="fixed top-30 right-6 z-30 flex size-12 cursor-pointer items-center justify-center rounded-lg bg-neutral-900 text-white shadow-sm transition duration-250 ease-out hover:bg-neutral-700 active:scale-95 dark:bg-neutral-100 dark:text-black dark:hover:bg-neutral-50"> <svg width="1em" height="1em" class="size-6" data-icon="lucide:list">   <symbol id="ai:lucide:list" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5h.01M3 12h.01M3 19h.01M8 5h13M8 12h13M8 19h13"></path></symbol><use href="#ai:lucide:list"></use>  </svg> </button>
+    <button id="open-toc-button" aria-label="Open table of contents" class="fixed top-30 right-6 z-30 flex size-12 cursor-pointer items-center justify-center rounded-lg bg-neutral-900 text-white shadow-sm transition duration-250 ease-out hover:bg-neutral-700 active:scale-95 "> <svg width="1em" height="1em" class="size-6" data-icon="lucide:list">   <symbol id="ai:lucide:list" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5h.01M3 12h.01M3 19h.01M8 5h13M8 12h13M8 19h13"></path></symbol><use href="#ai:lucide:list"></use>  </svg> </button>
 <article class="mx-auto max-w-4xl px-4 py-12 sm:px-6 lg:px-8 pt-0">  <div data-pagefind-body=""> <!-- Header --> <header class="mb-12">  <h1 data-pagefind-meta="title" class="mb-6 text-4xl font-bold sm:text-5xl sm:leading-snug" set:html={post.title.rendered}></h1>
-     <div class="flex flex-wrap gap-6 text-gray-700 dark:text-gray-300"> <div class="flex items-center gap-2"> <svg width="1em" height="1em" class="size-5" data-icon="lucide:user-pen">   <symbol id="ai:lucide:user-pen" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M11.5 15H7a4 4 0 0 0-4 4v2m18.378-4.374a1 1 0 0 0-3.004-3.004l-4.01 4.012a2 2 0 0 0-.506.854l-.837 2.87a.5.5 0 0 0 .62.62l2.87-.837a2 2 0 0 0 .854-.506z"></path><circle cx="10" cy="7" r="4"></circle></g></symbol><use href="#ai:lucide:user-pen"></use>  </svg> 
+     <div class="flex flex-wrap gap-6 text-gray-700 "> <div class="flex items-center gap-2"> <svg width="1em" height="1em" class="size-5" data-icon="lucide:user-pen">   <symbol id="ai:lucide:user-pen" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M11.5 15H7a4 4 0 0 0-4 4v2m18.378-4.374a1 1 0 0 0-3.004-3.004l-4.01 4.012a2 2 0 0 0-.506.854l-.837 2.87a.5.5 0 0 0 .62.62l2.87-.837a2 2 0 0 0 .854-.506z"></path><circle cx="10" cy="7" r="4"></circle></g></symbol><use href="#ai:lucide:user-pen"></use>  </svg> 
       <span>
         <a href='/author/james-hary'>
   {post._embedded.author[0].name || "James Henry"}
@@ -49,20 +49,20 @@ const seo = await seoRes.json();
           month: "short",
          day: "numeric",
         })}
-        </time>   </span> </div> </div> <div class="flex items-center gap-2 mt-6"> <svg width="1em" height="1em" class="text-gray-700 dark:text-gray-300" data-icon="lucide:link">   <symbol id="ai:lucide:link" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></g></symbol><use href="#ai:lucide:link"></use>  </svg> <!-- href={`/search?series=${encodeURIComponent(series)}`} --> 
+        </time>   </span> </div> </div> <div class="flex items-center gap-2 mt-6"> <svg width="1em" height="1em" class="text-gray-700 " data-icon="lucide:link">   <symbol id="ai:lucide:link" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></g></symbol><use href="#ai:lucide:link"></use>  </svg> <!-- href={`/search?series=${encodeURIComponent(series)}`} --> 
           <span data-pagefind-filter="series" class="relative inline-block active:scale-95 text-sm font-medium underline underline-offset-4"><a href=`/category/${post._embedded["wp:term"][0][0].name.replace(" ", '-').toLowerCase()}`>{post._embedded["wp:term"][0][0].name}</a></span> </div> 
-        <div class="relative overflow-hidden bg-neutral-200 dark:bg-neutral-700 mt-6 aspect-video rounded-xl"> <img data-pagefind-ignore="" src={post._embedded["wp:featuredmedia"][0].source_url} alt={post._embedded["wp:featuredmedia"][0].alt_text} aria-hidden="true" class="absolute inset-0 h-full w-full scale-105 object-cover blur-xl transition duration-250 ease-out group-hover:scale-105 group-active:scale-105 medium-zoom-image" loading="eager" decoding="async"> <img class="astro-cloudinary-cldimage absolute inset-0 h-full w-full object-cover transition duration-250 ease-out group-hover:scale-105 group-active:scale-95 medium-zoom-image" alt={post._embedded["wp:featuredmedia"][0].alt_text} loading="eager" fetchpriority="high" data-pagefind-meta="image[src], image_alt[alt]"  decoding="async" style="object-fit:cover;width:100%"  src={post._embedded["wp:featuredmedia"][0].source_url}> </div> </header> <!-- Content --> <div class="prose prose-lg dark:prose-invert max-w-none text-black dark:text-neutral-100 flex flex-col gap-5" set:html={post.content.rendered}>    </div> </div>   
+        <div class="relative overflow-hidden bg-neutral-200  mt-6 aspect-video rounded-xl"> <img data-pagefind-ignore="" src={post._embedded["wp:featuredmedia"][0].source_url} alt={post._embedded["wp:featuredmedia"][0].alt_text} aria-hidden="true" class="absolute inset-0 h-full w-full scale-105 object-cover blur-xl transition duration-250 ease-out group-hover:scale-105 group-active:scale-105 medium-zoom-image" loading="eager" decoding="async"> <img class="astro-cloudinary-cldimage absolute inset-0 h-full w-full object-cover transition duration-250 ease-out group-hover:scale-105 group-active:scale-95 medium-zoom-image" alt={post._embedded["wp:featuredmedia"][0].alt_text} loading="eager" fetchpriority="high" data-pagefind-meta="image[src], image_alt[alt]"  decoding="async" style="object-fit:cover;width:100%"  src={post._embedded["wp:featuredmedia"][0].source_url}> </div> </header> <!-- Content --> <div class="prose prose-lg  max-w-none text-black  flex flex-col gap-5" set:html={post.content.rendered}>    </div> </div>   
         <nav class="mt-12 pt-6"><div class="flex flex-col-reverse gap-6 md:grid md:grid-cols-2">
           {previousPost && (
   <a
     href={`/blog/${previousPost.slug}`}
-    class="group flex flex-col rounded-lg border border-neutral-200 p-6 transition duration-250 hover:border-[#025831] active:scale-95 dark:border-neutral-700 dark:hover:border-yellow-400"
+    class="group flex flex-col rounded-lg border border-neutral-200 p-6 transition duration-250 hover:border-[#025831] active:scale-95 "
   >
-    <span class="mb-2 text-sm text-[#025831] dark:text-gray-300">
+    <span class="mb-2 text-sm text-[#025831] ">
     Previous blog
     </span>
 
-    <span class="text-lg font-medium transition-colors duration-250 group-hover:text-[#025831]dark:group-hover:text-yellow-400">
+    <span class="text-lg font-medium transition-colors duration-250 group-hover:text-[#025831]">
       ← {previousPost.title.rendered}
     </span>
   </a>
@@ -71,30 +71,30 @@ const seo = await seoRes.json();
 {nextPost && (
   <a
     href={`/blog/${nextPost.slug}`}
-    class="group flex flex-col rounded-lg border border-neutral-200 p-6 transition duration-250 hover:border-[#025831] active:scale-95 dark:border-neutral-700 dark:hover:border-yellow-400"
+    class="group flex flex-col rounded-lg border border-neutral-200 p-6 transition duration-250 hover:border-[#025831] active:scale-95"
   >
-    <span class="mb-2 text-sm text-gray-700 dark:text-gray-300">
+    <span class="mb-2 text-sm text-gray-700 ">
       Next blog 
     </span>
 
-    <span class="text-lg font-medium transition-colors duration-250 group-hover:text-[#025831] dark:group-hover:text-yellow-400">
+    <span class="text-lg font-medium transition-colors duration-250 group-hover:text-[#025831] ">
       {nextPost.title.rendered} →
     </span>
   </a>
 )}</div></nav>  
     </article>
 <toc-sidebar> 
-  <aside id="toc-sidebar" class="fixed top-16 right-0 z-50 h-[calc(100vh-4rem)] w-full max-w-xs translate-x-full overflow-y-auto bg-white p-8 shadow-xl transition-transform duration-500 will-change-transform sm:w-80 lg:w-96 dark:bg-neutral-800" style="transition-timing-function: cubic-bezier(0.32, 0.72, 0, 1);"> 
-    <nav id="toc"> <div class="mb-4 flex items-center justify-between"> <h2 class="text-lg font-semibold tracking-wider text-neutral-900 uppercase dark:text-white">
+  <aside id="toc-sidebar" class="fixed top-16 right-0 z-50 h-[calc(100vh-4rem)] w-full max-w-xs translate-x-full overflow-y-auto bg-white p-8 shadow-xl transition-transform duration-500 will-change-transform sm:w-80 lg:w-96 " style="transition-timing-function: cubic-bezier(0.32, 0.72, 0, 1);"> 
+    <nav id="toc"> <div class="mb-4 flex items-center justify-between"> <h2 class="text-lg font-semibold tracking-wider text-neutral-900 uppercase ">
 On this page
-</h2> <button id="close-toc-button" aria-label="Close table of contents" class="relative inline-block cursor-pointer rounded-full text-neutral-600 transition duration-250 ease-out before:absolute before:-inset-x-1.75 before:-inset-y-2.5 before:content-[''] hover:text-[#025831] active:scale-95 dark:text-neutral-400 dark:hover:text-yellow-400">
+</h2> <button id="close-toc-button" aria-label="Close table of contents" class="relative inline-block cursor-pointer rounded-full text-neutral-600 transition duration-250 ease-out before:absolute before:-inset-x-1.75 before:-inset-y-2.5 before:content-[''] hover:text-[#025831] active:scale-95  ">
   <svg width="1em" height="1em" viewBox="0 0 24 24" class="size-6" data-icon="lucide:x">
     <symbol id="ai:lucide:x" viewBox="0 0 24 24">
       <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 6 6 18M6 6l12 12"></path>
     </symbol>
     <use href="#ai:lucide:x"></use>
   </svg>
-</button> </div> <ul id='on_page'> <li class="toc-item-wrapper" data-depth="2">  </li><li class="toc-item-wrapper" data-depth="2"> </li><li class="toc-item-wrapper" data-depth="2"> <a href="#youve-delivered-now-what" data-slug="youve-delivered-now-what" class="relative block truncate py-1.5 transition duration-250 ease-out hover:text-blue-600 dark:text-gray-300 dark:hover:text-yellow-400 pl-3"> You’ve Delivered. Now What? </a> <ul class="mt-1"> <li class="toc-item-wrapper" data-depth="3"> <a href="#final-step-of-the-series" data-slug="final-step-of-the-series" class="relative block truncate py-1.5 transition duration-250 ease-out hover:text-blue-600 dark:text-gray-300 dark:hover:text-yellow-400 pl-3"> Final Step of the Series </a>  </li> </ul> </li> </ul> </nav> </aside> </toc-sidebar>
+</button> </div> <ul id='on_page'> <li class="toc-item-wrapper" data-depth="2">  </li><li class="toc-item-wrapper" data-depth="2"> </li><li class="toc-item-wrapper" data-depth="2"> <a href="#youve-delivered-now-what" data-slug="youve-delivered-now-what" class="relative block truncate py-1.5 transition duration-250 ease-out hover:text-blue-600   pl-3"> You’ve Delivered. Now What? </a> <ul class="mt-1"> <li class="toc-item-wrapper" data-depth="3"> <a href="#final-step-of-the-series" data-slug="final-step-of-the-series" class="relative block truncate py-1.5 transition duration-250 ease-out hover:text-blue-600  pl-3"> Final Step of the Series </a>  </li> </ul> </li> </ul> </nav> </aside> </toc-sidebar>
 <div id="overlay" class="fixed inset-0 z-40 bg-black/50 transition-opacity duration-500 opacity-0 invisible pointer-events-none"></div>
 
 <style>
@@ -160,8 +160,7 @@ On this page
         a.classList.add(
           "relative", "block", "truncate", "py-1.5",
           "transition", "duration-250", "ease-out",
-          "hover:text-[#025831]", "dark:text-gray-300",
-          "dark:hover:text-yellow-400", "pl-3", "hover:text-[20px]",
+          "hover:text-[#025831]", "pl-3", "hover:text-[20px]",
           "hover:text-[#025831]", "hover:font-bold"
         );
 
