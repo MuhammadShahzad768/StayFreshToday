@@ -31,14 +31,16 @@ import { decode } from "html-entities";
       {healthPosts.map((post) => (
         <article class="group relative flex flex-col">
           <div class="relative overflow-hidden   mb-4 aspect-video rounded-lg height-[200px]">
-            <img
-              class="absolute inset-0 h-full w-full object-contain transition duration-250 ease-out group-hover:scale-105"
-              alt={post._embedded["wp:featuredmedia"][0].alt_text}
-              loading="lazy"
-              sizes="33vw"
-              decoding="async"
-              src={post._embedded["wp:featuredmedia"][0].source_url}
-            >
+          <img
+  class="absolute inset-0 h-full w-full object-cover transition duration-250 ease-out group-hover:scale-105"
+  alt={post._embedded["wp:featuredmedia"][0].alt_text}
+  loading="lazy"
+  decoding="async"
+  src={
+    post._embedded["wp:featuredmedia"][0].media_details?.sizes?.large?.source_url ||
+    post._embedded["wp:featuredmedia"][0].source_url
+  }
+/>
           </div>
           <h3 class="mb-2 line-clamp-2 text-xl font-semibold transition-colors duration-250 ease-out group-hover:text-[#025831] group-hover:underline group-hover:decoration-[#025831]">
             <a
@@ -70,13 +72,15 @@ import { decode } from "html-entities";
               <article class="group relative flex flex-col">
                 <div class="relative overflow-hidden bg-neutral-200  mb-4 aspect-video rounded-lg height-[200px]">
                   <img
-                    class="absolute inset-0 h-full w-full object-cover"
-                    alt={post._embedded["wp:featuredmedia"][0].alt_text}
-                    loading="lazy"
-                    sizes="100vw"
-                    decoding="async"
-                    src={post._embedded["wp:featuredmedia"][0].source_url}
-                  >
+  class="absolute inset-0 h-full w-full object-cover"
+  alt={post._embedded["wp:featuredmedia"][0].alt_text}
+  loading="lazy"
+  decoding="async"
+  src={
+    post._embedded["wp:featuredmedia"][0].media_details?.sizes?.medium_large?.source_url ||
+    post._embedded["wp:featuredmedia"][0].source_url
+  }
+/>
                 </div>
                 <h3 class="mb-2 line-clamp-2 text-xl font-semibold">
                   <a href={`/blog/${post.slug}`} class="after:absolute after:inset-0 after:content-['']" title={post.title.rendered}>{post.title.rendered}</a>

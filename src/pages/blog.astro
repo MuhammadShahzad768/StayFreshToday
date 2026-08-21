@@ -9,9 +9,34 @@ const response = await fetch(
 );
 
 const posts = await response.json();
+const seoData = `
+<meta name="description" content="Explore skincare, haircare, health, nutrition, fitness, and wellness tips to help you build healthier habits and feel your best every day."/>
+<meta name="robots" content="follow, noindex"/>
+<meta property="og:locale" content="en_US" />
+<meta property="og:type" content="profile" />
+<meta property="og:title" content="James Henry - Stay Fresh Today" />
+<meta property="og:description" content="Welcome to Stayfreshtoday.com! My name is James Henry, and I am a seasoned nutritionist with over a decade of experience in the field." />
+<meta property="og:url" content="https://stayfreshtoday.com/author/james-henry/" />
+<meta property="og:site_name" content="Stay Fresh Today" />
+<meta property="og:image" content="https://stayfreshtoday.com/wp-content/uploads/2024/07/Stay-Fresh-Today.jpg" />
+<meta property="og:image:secure_url" content="https://stayfreshtoday.com/wp-content/uploads/2024/07/Stay-Fresh-Today.jpg" />
+<meta property="og:image:width" content="1500" />
+<meta property="og:image:height" content="788" />
+<meta property="og:image:type" content="image/jpeg" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="James Henry - Stay Fresh Today" />
+<meta name="twitter:description" content="Welcome to Stayfreshtoday.com! My name is James Henry, and I am a seasoned nutritionist with over a decade of experience in the field." />
+<meta name="twitter:image" content="https://stayfreshtoday.com/wp-content/uploads/2024/07/Stay-Fresh-Today.jpg" />
+<meta name="twitter:label1" content="Name" />
+<meta name="twitter:data1" content="James Henry" />
+<meta name="twitter:label2" content="Posts" />
+<meta name="twitter:data2" content="173" />
+<script type="application/ld+json" class="rank-math-schema-pro">{"@context":"https://schema.org","@graph":[{"@type":"Person","@id":"https://stayfreshtoday.com/#person","name":"Stay Fresh Today","image":{"@type":"ImageObject","@id":"https://stayfreshtoday.com/#logo","url":"https://stayfreshtoday.com/wp-content/uploads/2024/07/Stay-Fresh-Today.png","contentUrl":"https://stayfreshtoday.com/wp-content/uploads/2024/07/Stay-Fresh-Today.png","caption":"Stay Fresh Today","inLanguage":"en-US","width":"252","height":"252"}},{"@type":"WebSite","@id":"https://stayfreshtoday.com/#website","url":"https://stayfreshtoday.com","name":"Stay Fresh Today","publisher":{"@id":"https://stayfreshtoday.com/#person"},"inLanguage":"en-US"},{"@type":"BreadcrumbList","@id":"https://stayfreshtoday.com/author/james-henry/#breadcrumb","itemListElement":[{"@type":"ListItem","position":"1","item":{"@id":"https://stayfreshtoday.com","name":"Home"}}]},{"@type":"ProfilePage","@id":"https://stayfreshtoday.com/author/james-henry/#webpage","url":"https://stayfreshtoday.com/author/james-henry/","name":"James Henry - Stay Fresh Today","isPartOf":{"@id":"https://stayfreshtoday.com/#website"},"inLanguage":"en-US","breadcrumb":{"@id":"https://stayfreshtoday.com/author/james-henry/#breadcrumb"}},{"@type":"Person","@id":"https://stayfreshtoday.com/author/james-henry/","name":"James Henry","description":"Welcome to Stayfreshtoday.com! My name is James Henry, and I am a seasoned nutritionist with over a decade of experience in the field.","url":"https://stayfreshtoday.com/author/james-henry/","image":{"@type":"ImageObject","@id":"https://secure.gravatar.com/avatar/e5be98a1b74e4b123bae680779ece8378e7d05e4472c5d0acb36d555262e1613?s=96&amp;d=mm&amp;r=g","url":"https://secure.gravatar.com/avatar/e5be98a1b74e4b123bae680779ece8378e7d05e4472c5d0acb36d555262e1613?s=96&amp;d=mm&amp;r=g","caption":"James Henry","inLanguage":"en-US"},"sameAs":["https://www.quora.com/profile/James-Henry-1204"],"mainEntityOfPage":{"@id":"https://stayfreshtoday.com/author/james-henry/#webpage"}}]}</script>
+<!-- /Rank Math WordPress SEO plugin -->
+`;
 ---
 
-<Layout title="Blogs | Skincare & Haircare | Health & Nutrition Tips | Stayfreshtoday.com">
+<Layout title="Blogs | Skincare & Haircare | Health & Nutrition Tips | Stayfreshtoday.com" seoHead={seoData}>
 
   <section class="max-w-7xl px-4 sm:px-6 lg:px-8 m-auto">
 
