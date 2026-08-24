@@ -4,7 +4,8 @@ export async function GET() {
   // Get all WordPress posts
   const posts = await getAllPosts();
 
-   const staticPages = [
+  // Static pages
+  const staticPages = [
     {
       url: "/",
       lastmod: "2026-08-24T00:00:00+00:00",
@@ -32,27 +33,31 @@ export async function GET() {
     },
   ];
 
-
   const urls = [
-    ...staticPages.map((path) => `${site}${path}`),
-  ...posts.map(
-  (post) => `  <url>
+    // Static pages
+    ...staticPages.map(
+      (page) => `  <url>
+    <loc>${site}${page.url}</loc>
+    <lastmod>${page.lastmod}</lastmod>
+    <priority>${page.priority}</priority>
+  </url>`
+    ),
+
+    // WordPress posts
+    ...posts.map(
+      (post) => `  <url>
     <loc>${site}/blog/${post.slug}/</loc>
     <lastmod>${post.modified}</lastmod>
     <priority>0.9</priority>
   </url>`
-)
+    ),
   ];
 
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${urls
-  .map(
-    (url) => `  <url>
-    <loc>${url}</loc>
-  </url>`
-  )
-  .join("\n")}
+
+${urls.join("\n")}
+
 </urlset>`;
 
   return new Response(xml, {
