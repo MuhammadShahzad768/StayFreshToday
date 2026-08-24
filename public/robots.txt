@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://stayfreshtoday.com/sitemap.xml
