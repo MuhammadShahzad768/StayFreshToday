@@ -4,13 +4,34 @@ export async function GET() {
   // Get all WordPress posts
   const posts = await getAllPosts();
 
-  const staticPages = [
-    "/",
-    "/about/",
-    "/blog/",
-    "/privacy-policy/",
-    "/terms-and-conditions/",
+   const staticPages = [
+    {
+      url: "/",
+      lastmod: "2026-08-24T00:00:00+00:00",
+      priority: "1.0",
+    },
+    {
+      url: "/about/",
+      lastmod: "2026-08-20T00:00:00+00:00",
+      priority: "0.8",
+    },
+    {
+      url: "/blog/",
+      lastmod: "2026-08-24T00:00:00+00:00",
+      priority: "0.9",
+    },
+    {
+      url: "/privacy-policy/",
+      lastmod: "2026-08-20T00:00:00+00:00",
+      priority: "0.5",
+    },
+    {
+      url: "/terms-and-conditions/",
+      lastmod: "2026-08-20T00:00:00+00:00",
+      priority: "0.5",
+    },
   ];
+
 
   const urls = [
     ...staticPages.map((path) => `${site}${path}`),
